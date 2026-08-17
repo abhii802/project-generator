@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Idea Generator — Dr. Abhishek Bhattacherjee | MM(DU) Mullana</title>
+<meta name="description" content="Turn a broad technology into a 20-project catalog for B.Tech CSE project labs — MM(DU), Mullana-Ambala.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F5F6F8; --paper-raised:#FFFFFF; --ink:#1C1B1F; --ink-soft:#5B6472; --ink-faint:#8891A0;
+    --crimson:#E31E24; --crimson-dark:#A11319; --crimson-wash:#FDEAEA;
+    --brass:#B8891A; --brass-wash:#FBF1DC;
+    --line:#E3E5EA; --line-strong:#CBCFD8;
+    --radius:14px; --shadow-card: 0 1px 2px rgba(28,27,31,.04), 0 8px 24px -12px rgba(28,27,31,.16);
+    --serif:'Fraunces', Georgia, serif; --sans:'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --mono:'IBM Plex Mono', ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{color:inherit;}
+  ::selection{background:var(--crimson-wash); color:var(--crimson-dark);}
+  .wrap{max-width:880px; margin:0 auto; padding:0 28px;}
+  a:focus-visible, button:focus-visible, input:focus-visible{ outline:2px solid var(--crimson); outline-offset:3px; border-radius:4px; }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+
+  .ribbon{ background:var(--ink); color:#EDEEF1; font-family:var(--mono); font-size:11.5px; letter-spacing:.04em; text-align:center; padding:7px 12px; }
+  .ribbon b{color:#fff; font-weight:600;}
+
+  header.seal-band{ background:var(--paper-raised); border-bottom:1px solid var(--line); }
+  .seal-band-inner{ display:flex; align-items:center; gap:22px; padding:26px 28px; max-width:880px; margin:0 auto; flex-wrap:wrap; }
+  .seal{ flex:none; width:60px; height:60px; }
+  .seal svg{width:100%; height:100%;}
+  .uni-name{flex:1; min-width:220px;}
+  .uni-name .eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.09em; color:var(--crimson-dark); text-transform:uppercase; margin:0 0 4px; }
+  .uni-name h1{ font-family:var(--serif); font-weight:560; font-size:clamp(17px,2.2vw,22px); margin:0 0 4px; letter-spacing:-.01em; }
+  .uni-name .sub{ font-size:12.5px; color:var(--ink-soft); }
+
+  .hero{ padding:56px 0 40px; border-bottom:1px solid var(--line); }
+  .file-tag{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--crimson-dark); background:var(--crimson-wash); padding:6px 12px 6px 10px; border-radius:100px; margin-bottom:20px; }
+  .file-tag .dot{width:6px;height:6px;border-radius:50%; background:var(--crimson);}
+  .hero h2{ font-family:var(--serif); font-weight:700; font-size:clamp(30px,4.2vw,44px); line-height:1.08; letter-spacing:-.015em; margin:0 0 16px; }
+  .hero h2 em{ font-style:italic; font-weight:500; color:var(--crimson); }
+  .hero .lede{ font-size:16.5px; color:var(--ink-soft); max-width:62ch; margin:0 0 22px; }
+  .prof-card{ display:flex; gap:14px; align-items:center; padding:14px 16px; background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); max-width:440px; box-shadow:var(--shadow-card); }
+  .prof-initials{ flex:none; width:42px; height:42px; border-radius:50%; background:linear-gradient(155deg, var(--crimson), var(--crimson-dark)); color:#fff; font-family:var(--serif); font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; }
+  .prof-card .name{font-weight:600; font-size:13.5px;}
+  .prof-card .role{font-size:12px; color:var(--ink-soft);}
+
+  .panel-section{ padding:44px 0 60px; }
+  .card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-card); overflow:hidden; }
+  .card-top{ display:flex; gap:16px; padding:28px 28px 20px; align-items:flex-start; flex-wrap:wrap; }
+  .seal-num{ flex:none; width:48px; height:48px; border-radius:50%; border:1.5px solid var(--crimson); color:var(--crimson-dark); font-family:var(--mono); font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:center; position:relative; }
+  .seal-num::after{ content:""; position:absolute; inset:4px; border:1px dashed var(--crimson); border-radius:50%; opacity:.5; }
+  .card-copy{flex:1; min-width:240px;}
+  .card-copy .kicker{ font-family:var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint); margin:2px 0 6px; }
+  .card-copy h3{ font-family:var(--serif); font-size:22px; font-weight:600; margin:0 0 10px; }
+  .card-copy .story{ color:#40404A; font-size:14.5px; margin:0; max-width:72ch; }
+
+  .gen-panel{ border-top:1px dashed var(--line-strong); background:#FBFBFC; padding:24px 28px 28px; }
+  .gen-panel .gen-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+  .gen-panel input[type="text"]{ flex:1; min-width:220px; padding:12px 14px; border:1px solid var(--line-strong); border-radius:9px; font-family:var(--sans); font-size:14.5px; background:#fff; }
+  .gen-panel input[type="text"]:focus{ border-color:var(--crimson); }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-weight:600; font-size:14px; padding:12px 18px; border-radius:9px; border:1px solid transparent; text-decoration:none; cursor:pointer; transition:transform .12s ease, background .15s ease; }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--crimson); color:#fff;}
+  .btn-primary:hover{background:var(--crimson-dark);}
+  .btn:disabled{opacity:.55; cursor:not-allowed; transform:none;}
+  .btn svg{width:15px; height:15px; flex:none;}
+  .gen-status{ font-family:var(--mono); font-size:12.5px; margin-top:10px; min-height:16px; }
+  .gen-status.ok{color:#1C7C3F;} .gen-status.err{color:var(--crimson-dark);} .gen-status.busy{color:var(--brass);}
+
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .chip-btn{ font-family:var(--mono); font-size:11.5px; padding:6px 12px; border-radius:100px; border:1px solid var(--line-strong); background:#fff; color:var(--ink-soft); cursor:pointer; }
+  .chip-btn:hover{ border-color:var(--crimson); color:var(--crimson-dark); }
+
+  details.disclosure{margin-top:16px;}
+  details.disclosure > summary{ cursor:pointer; list-style:none; font-size:12.5px; color:var(--ink-faint); display:inline-flex; align-items:center; gap:5px; }
+  details.disclosure > summary::-webkit-details-marker{display:none;}
+  details.disclosure > summary::before{content:"▸"; font-size:10px;}
+  details.disclosure[open] > summary::before{content:"▾";}
+  details.disclosure p{font-size:12.5px; color:var(--ink-soft); margin:8px 0 0; max-width:74ch;}
+
+  .sample-strip{ margin-top:26px; }
+  .sample-strip h4{ font-family:var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 10px; }
+  .sample-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  @media (max-width:640px){ .sample-grid{grid-template-columns:1fr;} }
+  .sample-item{ border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:var(--paper-raised); }
+  .sample-item .n{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+  .sample-item .l{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+
+  footer{padding:36px 0 56px; border-top:1px solid var(--line);}
+  .footer-note{ font-size:12px; color:var(--ink-faint); max-width:80ch; }
+
+  .toast-region{position:fixed; bottom:20px; right:20px; z-index:50; display:flex; flex-direction:column; gap:10px;}
+  .toast{ background:var(--ink); color:#fff; font-size:13px; padding:12px 16px; border-radius:10px; box-shadow:0 10px 30px -6px rgba(0,0,0,.35); max-width:320px; animation:toastIn .18s ease; }
+  .toast.err{background:var(--crimson-dark);}
+  @keyframes toastIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<div class="ribbon">Faculty Administrative Dossier &nbsp;·&nbsp; Compiled for <b>Dr. Abhishek Bhattacherjee, Professor</b> &nbsp;·&nbsp; MM(DU), Mullana–Ambala</div>
+
+<header class="seal-band">
+  <div class="seal-band-inner">
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#E31E24" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="39" fill="none" stroke="#B8891A" stroke-width="1" stroke-dasharray="2.4 3.2"/>
+        <text x="50" y="46" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="26" fill="#E31E24">MM</text>
+        <text x="50" y="64" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="8.5" letter-spacing="1" fill="#1C1B1F">(DU) 1993</text>
+      </svg>
+    </div>
+    <div class="uni-name">
+      <p class="eyebrow">Maharishi Markandeshwar</p>
+      <h1>Deemed to be University, Mullana–Ambala</h1>
+      <p class="sub">Think Success · Think MM(DU) — Category-I University, UGC</p>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="file-tag"><span class="dot"></span> Resource 07 · Student Projects</span>
+    <h2>Turn one <em>technology</em> into twenty project ideas.</h2>
+    <p class="lede">Type a broad technology and get a full, self-contained catalog of 20 fresh, right-sized B.Tech project briefs — each with a problem statement, tech stack, key features, deliverables and a difficulty rating — plus a shared 16-week lab roadmap. Every run reshuffles the combinations, so no two batches of students need to compare identical ideas.</p>
+    <div class="prof-card">
+      <div class="prof-initials">AB</div>
+      <div>
+        <div class="name">Dr. Abhishek Bhattacherjee</div>
+        <div class="role">Professor · Department of Computer Science &amp; Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel-section">
+  <div class="wrap">
+    <div class="card" id="r7">
+      <div class="card-top">
+        <div class="seal-num">07</div>
+        <div class="card-copy">
+          <p class="kicker">Student Projects · Draft Assistance</p>
+          <h3>Project Idea Generator</h3>
+          <p class="story">Works for Python, Web Development, Machine Learning, Cybersecurity, Mobile Development, Cloud Computing, Blockchain, Computer Vision, NLP, Data Science, Game Development, AR/VR, DBMS, IoT — or type any other technology and it will still generate a full catalog around it.</p>
+        </div>
+      </div>
+      <div class="gen-panel">
+        <div class="gen-row">
+          <input type="text" id="project-topic" placeholder="e.g. Machine Learning" aria-label="Project technology">
+          <button class="btn btn-primary" id="project-btn" onclick="Dossier.generateProjects()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            Generate &amp; Download Catalog (.html)
+          </button>
+        </div>
+        <div class="gen-status" id="project-status" role="status"></div>
+
+        <div class="chip-row" aria-label="Quick-pick technologies">
+          <button class="chip-btn" type="button" data-tech="Python">Python</button>
+          <button class="chip-btn" type="button" data-tech="Web Development">Web Development</button>
+          <button class="chip-btn" type="button" data-tech="Machine Learning">Machine Learning</button>
+          <button class="chip-btn" type="button" data-tech="Cybersecurity">Cybersecurity</button>
+          <button class="chip-btn" type="button" data-tech="Mobile App Development">Mobile Development</button>
+          <button class="chip-btn" type="button" data-tech="Cloud Computing">Cloud Computing</button>
+          <button class="chip-btn" type="button" data-tech="Blockchain">Blockchain</button>
+          <button class="chip-btn" type="button" data-tech="Computer Vision">Computer Vision</button>
+          <button class="chip-btn" type="button" data-tech="Natural Language Processing">NLP</button>
+          <button class="chip-btn" type="button" data-tech="Data Science">Data Science</button>
+          <button class="chip-btn" type="button" data-tech="Game Development">Game Development</button>
+          <button class="chip-btn" type="button" data-tech="AR/VR">AR/VR</button>
+          <button class="chip-btn" type="button" data-tech="DBMS">DBMS</button>
+          <button class="chip-btn" type="button" data-tech="IoT">IoT</button>
+        </div>
+
+        <details class="disclosure">
+          <summary>How this catalog is built</summary>
+          <p>Built entirely in your browser by combining the chosen technology with a bank of real-world problem domains — no server, nothing uploaded, and no external code is loaded or exposed to produce it. Every one of the 20 briefs is written out in full (problem, stack, features, deliverables) — nothing is left blank. In the downloaded catalog, clicking any idea's title (or its ◇ icon) instantly opens its ER Diagram, Mindmap, Flow Diagram, and DFD at Levels 0/1/2 — all synthesised from that idea's own domain, stack and features, no server call involved. Treat each brief and diagram set as a strong starting point for a student team to scope and refine, not a final specification.</p>
+        </details>
+
+        <div class="sample-strip">
+          <h4>What each catalog contains</h4>
+          <div class="sample-grid">
+            <div class="sample-item"><div class="n">20 sheets</div><div class="l">One per project, each with its own anchor and index entry</div></div>
+            <div class="sample-item"><div class="n">Tech stack · features · deliverables</div><div class="l">Sampled per project, no two sheets identical</div></div>
+            <div class="sample-item"><div class="n">16-week roadmap</div><div class="l">Shared phase-by-phase plan for a 4-member team</div></div>
+            <div class="sample-item"><div class="n">Click any idea title</div><div class="l">Instantly auto-generates its ER Diagram, Mindmap, Flow Diagram &amp; DFD (Levels 0–2)</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="footer-note">This page is a static, self-contained tool — Resource 07 from the Faculty Resource Dossier, split out on its own. It generates files locally in your browser; nothing is uploaded or stored. Maintained for Dr. Abhishek Bhattacherjee, Professor, Department of Computer Science &amp; Engineering, MM(DU), Mullana–Ambala.</p>
+  </div>
+</footer>
+
+<div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+<script>
+/* =========================================================================
+   PROJECT IDEA GENERATOR — fully self-contained, runs entirely in the
+   browser. No network calls, no server, no external libraries, nothing
+   uploaded or stored. Turns a broad technology into a 20-project catalog,
+   rendered as a standalone, downloadable HTML page.
+   ========================================================================= */
+const Dossier = (() => {
+
+  function toast(msg, isErr){
+    const region = document.getElementById('toast-region');
+    const el = document.createElement('div');
+    el.className = 'toast' + (isErr ? ' err' : '');
+    el.textContent = msg;
+    region.appendChild(el);
+    setTimeout(()=> el.remove(), 4200);
+  }
+  function setStatus(id, msg, cls){
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.className = 'gen-status ' + (cls||'');
+  }
+  function titleCase(s){ return s.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()); }
+  function safeFilename(s){ return s.replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_').slice(0,60) || 'Untitled'; }
+  function downloadBlob(blob, filename){
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=> URL.revokeObjectURL(url), 4000);
+  }
+  function hashSeed(s){ let h=0; for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0;} return h||1; }
+  function mulberry32(seed){
+    let a = seed;
+    return function(){
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function pick(rng, arr){ return arr[Math.floor(rng()*arr.length)]; }
+  function pickN(rng, arr, n){
+    const pool = arr.slice(); const out=[];
+    while(out.length<n && pool.length){ out.push(pool.splice(Math.floor(rng()*pool.length),1)[0]); }
+    return out;
+  }
+
+  const PROJECT_DOMAINS = [
+    {name:"Healthcare & Wellness", users:"patients and caregivers", pain:"tracking health metrics and getting timely reminders", goal:"stay on top of their health more proactively"},
+    {name:"Education & E-Learning", users:"students and teachers", pain:"personalising learning and tracking progress", goal:"teach and learn more effectively"},
+    {name:"Agriculture & Farming", users:"farmers and agri-cooperatives", pain:"predicting crop health and getting timely field insights", goal:"raise yield and cut losses"},
+    {name:"Finance & Personal Banking", users:"individuals and small businesses", pain:"managing budgets and spotting suspicious transactions", goal:"make smarter, safer financial decisions"},
+    {name:"E-Commerce & Retail", users:"online shoppers and small retailers", pain:"discovering relevant products and managing inventory", goal:"improve sales and the shopping experience"},
+    {name:"Transportation & Logistics", users:"commuters and delivery fleets", pain:"planning efficient routes and predicting delays", goal:"save time, fuel and operating cost"},
+    {name:"Environment & Sustainability", users:"city residents and environmental agencies", pain:"monitoring pollution and resource usage", goal:"make more sustainable, informed decisions"},
+    {name:"Campus & Student Life", users:"college students and administrators", pain:"coordinating events, resources and academic records", goal:"simplify everyday campus tasks"},
+    {name:"Accessibility & Inclusion", users:"people with visual, hearing or motor impairments", pain:"accessing digital content and everyday services independently", goal:"navigate daily tasks more independently"},
+    {name:"Public Safety & Disaster Management", users:"citizens and emergency responders", pain:"reporting incidents and coordinating a fast response", goal:"respond to emergencies faster"},
+    {name:"Smart Cities & Urban Living", users:"city residents and municipal staff", pain:"managing shared resources like parking, waste and utilities", goal:"improve everyday urban quality of life"},
+    {name:"Employment & Gig Economy", users:"job seekers and freelancers", pain:"finding relevant opportunities and building trust with clients", goal:"find and manage work more efficiently"},
+    {name:"Entertainment & Media", users:"content consumers and independent creators", pain:"discovering relevant content amid overwhelming choice", goal:"find and enjoy content more easily"},
+    {name:"Tourism & Hospitality", users:"travellers and small hospitality businesses", pain:"planning trips and managing bookings smoothly", goal:"plan and deliver smoother travel experiences"},
+    {name:"Sports & Fitness", users:"athletes and fitness enthusiasts", pain:"tracking performance and staying consistently motivated", goal:"reach fitness goals consistently"},
+    {name:"Social Good & Community", users:"NGOs and local community groups", pain:"coordinating volunteers and limited resources", goal:"mobilise community efforts more effectively"},
+    {name:"Mental Health & Wellbeing", users:"students and working professionals", pain:"tracking mood patterns and managing everyday stress", goal:"build healthier emotional habits"},
+    {name:"Food & Nutrition", users:"home cooks and health-conscious individuals", pain:"planning meals and tracking nutrition without extra effort", goal:"eat healthier with less day-to-day effort"}
+  ];
+
+  const GENERIC_TECH_PROFILE = {
+    stack:["a suitable backend (Python / Node.js / Java)","a relational or NoSQL database","a REST API layer","a simple web or mobile front end"],
+    capabilities:["Automation Tool","Recommendation System","Tracking Dashboard","Management Platform","Assistant App","Monitoring System","Matching Platform","Analytics Tool","Scheduling System","Verification System"],
+    features:["Clean, user-friendly interface","Role-based user accounts","Core workflow automation for the target users","Search, filter & reporting features","Notification / alerting system","Exportable data & reports"],
+    deliverables:["Working end-to-end application","System architecture documentation","User guide","Test / evaluation summary"]
+  };
+
+  const PROJECT_TECH_PROFILES = {
+    python:{ display:"Python", keywords:["python","scripting","automation"],
+      stack:["Python","Flask / FastAPI","SQLite","Pandas","argparse-based CLI","PyTest"],
+      capabilities:["Automation Tool","Command-Line Utility","Data Processing Pipeline","Scheduling Assistant","Report Generator","Rule-Based Recommender","File Organizer","Notification Bot","Workflow Automator","Configuration Manager"],
+      features:["Config-driven customisation (YAML/JSON)","Scheduled/automated runs (cron-style)","Structured logging & error handling","Simple CLI and/or GUI interface","Exportable reports (CSV/PDF)","Unit-tested core modules","Plugin-style extensibility"],
+      deliverables:["Well-documented Python package","CLI/GUI application","Automated test suite with coverage report","User setup guide"] },
+    web:{ display:"Web Development", keywords:["web","website","html","css","javascript","react","angular","vue","node","django","flask","full stack","frontend","backend","mern","mean"],
+      stack:["React","Node.js + Express","MongoDB / PostgreSQL","Django","REST API","Tailwind CSS","Socket.IO"],
+      capabilities:["Booking Platform","Marketplace","Community Portal","Collaboration Tool","Analytics Dashboard","Content Hub","Matching Platform","Review & Rating System","Ticketing System","Event Management System"],
+      features:["Responsive, mobile-friendly UI","User authentication & role-based access","RESTful API backend","Real-time updates via WebSockets","Admin panel with usage analytics","Search & filter functionality","Payment gateway integration (test mode)"],
+      deliverables:["Deployed full-stack web application","REST API documentation","Database schema diagram","Admin & end-user guides"] },
+    mobile:{ display:"Mobile App Development", keywords:["mobile","android","ios","flutter","react native","kotlin","swift","app development"],
+      stack:["Flutter","React Native","Firebase","SQLite","Kotlin / Swift","REST APIs"],
+      capabilities:["Tracker App","Companion App","On-the-Go Assistant","Marketplace App","Booking App","Community App","Reminder & Habit App","Offline-First App","Location-Aware App","Camera-Based Scanner App"],
+      features:["Offline-first local data sync","Push notifications","Location-based services (GPS/Maps)","Camera/gallery integration","Clean, intuitive mobile UI","Guided in-app onboarding flow","Cross-platform support (Android & iOS)"],
+      deliverables:["Installable mobile app (APK / TestFlight build)","Cloud backend setup (Firebase or similar)","UI/UX wireframes","User testing summary"] },
+    ml:{ display:"Machine Learning", keywords:["machine learning","ml","ai","artificial intelligence","deep learning","neural network"],
+      stack:["Python","scikit-learn","TensorFlow / Keras","PyTorch","Pandas","Flask / FastAPI (for serving)"],
+      capabilities:["Predictive Model","Recommendation Engine","Classification System","Anomaly Detector","Forecasting Tool","Risk-Scoring Model","Personalisation Engine","Pattern-Recognition System","Decision-Support Tool","Early-Warning System"],
+      features:["Data preprocessing & feature-engineering pipeline","Model training with cross-validation","Real-time or batch inference API","Performance dashboard (accuracy / precision / recall)","Comparison across multiple algorithms","Feature-importance / explainability view"],
+      deliverables:["Trained & evaluated ML model","Inference API / service","Notebook documenting experiments","Evaluation report with metrics"] },
+    data_science:{ display:"Data Science & Analytics", keywords:["data science","data analytics","analytics","business intelligence"," bi ","data visualization","data visualisation"],
+      stack:["Python","Pandas","NumPy","Plotly Dash (or similar BI dashboard)","SQL"],
+      capabilities:["Analytics Dashboard","Trend-Forecasting Tool","Insight Explorer","KPI Monitoring Tool","Comparative Analysis Tool","Anomaly-Spotting Dashboard","Segmentation Explorer","What-If Simulator","Reporting Suite"],
+      features:["Interactive charts & filters","Automated data-cleaning pipeline","Downloadable reports (PDF/Excel)","Trend & correlation analysis","Drill-down views by category/time","Custom KPI threshold alerts"],
+      deliverables:["Interactive dashboard","Data pipeline scripts","Analysis notebook","Insights summary report"] },
+    nlp:{ display:"Natural Language Processing", keywords:["nlp","natural language processing","text mining","chatbot","language model"],
+      stack:["Python","spaCy","NLTK","Hugging Face Transformers","Flask / FastAPI"],
+      capabilities:["Text Classifier","Summarisation Tool","Chatbot Assistant","Sentiment Analyzer","Named-Entity Extractor","Question-Answering System","Translation Aid","Plagiarism / Similarity Checker","Auto-Tagging Tool"],
+      features:["Text preprocessing & tokenisation pipeline","Pretrained transformer fine-tuning","Confidence / explanation scores","Optional multi-language support","Interactive chat/query interface","Batch document processing"],
+      deliverables:["Fine-tuned NLP model","Web/chat interface","Evaluation report (F1 / accuracy)","Sample dataset & annotations"] },
+    cv:{ display:"Computer Vision", keywords:["computer vision"," cv ","image processing","opencv","object detection"],
+      stack:["Python","OpenCV","TensorFlow / Keras or PyTorch","MediaPipe"],
+      capabilities:["Object Detector","Image Classifier","Real-Time Tracker","Gesture Recognizer","Defect / Anomaly Spotter","Scene Analyzer","Counting System","Face / Landmark Analyzer","Video Highlight Extractor"],
+      features:["Real-time webcam/video inference","Bounding-box / segmentation visualisation","Model trained on a public dataset","Configurable confidence thresholds","Batch image/video processing","Exportable annotated results"],
+      deliverables:["Trained vision model","Real-time demo application","Sample annotated dataset","Accuracy/performance report"] },
+    cybersecurity:{ display:"Cybersecurity", keywords:["cybersecurity","security","infosec","network security","ethical hacking"],
+      stack:["Python","Scapy","Wireshark (traffic analysis)","scikit-learn (ML-based detection)","Flask"],
+      capabilities:["Intrusion Detection System","Vulnerability Scanner","Phishing Detector","Log Anomaly Monitor","Access-Control Auditor","Password Strength / Leak Checker","Network Traffic Analyzer","Encrypted File Vault"],
+      features:["Real-time alerting on suspicious activity","Rule-based and/or ML-based detection","Dashboard of flagged events","Exportable audit/compliance reports","Configurable detection thresholds","Simulated-attack test suite"],
+      deliverables:["Working detection/scanning tool","Threat-model document","Test results against simulated attacks","Security report with recommendations"] },
+    cloud:{ display:"Cloud Computing", keywords:["cloud","aws","azure","gcp","devops"],
+      stack:["AWS / Azure / GCP free tier","Docker","Kubernetes (basic)","Terraform (basic IaC)","GitHub Actions (CI/CD)"],
+      capabilities:["Auto-Scaling Deployment Pipeline","Serverless Task Processor","Multi-Service Cost Dashboard","Backup & Disaster-Recovery Tool","Container Orchestration Demo","Resource-Usage Monitor","CI/CD Pipeline Template","Log Aggregation Dashboard"],
+      features:["Infrastructure-as-code setup","Auto-scaling based on load","Cost tracking & budget alerts","CI/CD pipeline with automated tests","Centralised logging & monitoring","Role-based cloud access control"],
+      deliverables:["Deployed cloud infrastructure (demo)","Infrastructure-as-code scripts","CI/CD pipeline configuration","Architecture diagram & cost report"] },
+    blockchain:{ display:"Blockchain", keywords:["blockchain","web3","smart contract","crypto","dapp"],
+      stack:["Solidity","Ethereum (testnet)","Hardhat / Truffle","Web3.js / Ethers.js","React"],
+      capabilities:["Decentralized Voting App","Supply-Chain Tracker","Certificate Verification System","Escrow Payment Contract","Decentralized Marketplace","Crowdfunding dApp","Identity-Verification System","Loyalty/Rewards Token System"],
+      features:["Smart contract with unit tests","Wallet-based authentication (MetaMask)","Transparent, auditable transaction history","Gas-optimised contract logic","Testnet deployment","Simple frontend for contract interaction"],
+      deliverables:["Deployed smart contract (testnet)","Contract test suite","Web frontend for interaction","Technical documentation & architecture diagram"] },
+    game_dev:{ display:"Game Development", keywords:["game","unity","unreal","game design"],
+      stack:["Unity (C#)","Godot","Python (Pygame)","Blender (basic assets)"],
+      capabilities:["2D Puzzle Game","Educational Mini-Game Suite","Endless Runner","Strategy/Simulation Game","AI-Driven NPC Behaviour Demo","Local Multiplayer Mini-Game","Accessibility-Focused Game","Procedurally Generated Level Game"],
+      features:["Core gameplay loop with win/lose states","Level progression & difficulty scaling","Basic AI/NPC behaviour","Score tracking & leaderboard","Sound & visual feedback polish","Playtesting-based balancing"],
+      deliverables:["Playable game build","Game design document","Playtest feedback summary","Source code with asset credits"] },
+    ar_vr:{ display:"AR / VR", keywords:["ar","vr","augmented reality","virtual reality","xr","mixed reality"],
+      stack:["Unity + AR Foundation","ARCore / ARKit","WebXR / Three.js","Blender (basic assets)"],
+      capabilities:["AR Try-On Tool","Virtual Campus Tour","AR Learning Aid","VR Training Simulator","AR Navigation Overlay","Virtual Product Showcase","AR Measurement Tool","VR Soft-Skills Trainer"],
+      features:["Real-world surface/marker detection","3D model placement & interaction","Immersive UI/UX for headset or mobile","Voice or gesture-based controls","Cross-device compatibility (mobile AR)","Guided tutorial/onboarding flow"],
+      deliverables:["Working AR/VR demo application","3D asset library used","User-experience test notes","Setup & deployment guide"] },
+    dbms:{ display:"Database Systems (DBMS)", keywords:["database","dbms","sql","data management"],
+      stack:["MySQL / PostgreSQL","SQL","Python or Java backend","ER modelling tools"],
+      capabilities:["Inventory Management System","Records Management System","Multi-User Booking Database","Data-Warehouse Mini-Project","Role-Based Access Database App","Report-Generation System","Audit-Trail Tracking System","Query-Optimization Demo Tool"],
+      features:["Normalised relational schema design","Role-based access control","Complex queries, joins & stored procedures","Automated backup/restore scripts","Report generation from live queries","Transaction & concurrency handling"],
+      deliverables:["Designed database schema (ER diagram)","Working application with DB integration","Sample queries & stored procedures","Backup/recovery documentation"] },
+    iot:{ display:"IoT (Software Simulation)", keywords:["iot","internet of things"],
+      stack:["Python","MQTT (simulated broker)","Node-RED","InfluxDB + Grafana","Flask"],
+      capabilities:["Simulated Sensor Dashboard","Smart-Home Automation Simulator","Predictive-Maintenance Simulator","Environmental-Monitoring Dashboard","Fleet-Tracking Simulator","Energy-Usage Monitoring Dashboard","Smart-Agriculture Dashboard Simulator","Alert & Automation Rule Engine"],
+      features:["Simulated sensor data stream (MQTT)","Rule-based automation triggers","Real-time dashboard visualisation","Historical data logging & trend charts","Alert/notification system","Configurable virtual device fleet"],
+      deliverables:["Working simulation dashboard (no physical hardware required)","Simulated data-generator scripts","Automation-rule documentation","System architecture diagram"] }
+  };
+
+  const PROJECT_TITLE_TEMPLATES = [
+    "{capability} for {users}", "{tech}-Based {capability} for {users}",
+    "Smart {capability} for {users}", "{capability}: Empowering {users}"
+  ];
+  const PROJECT_PROBLEM_TEMPLATES = [
+    "{Users} often struggle with {pain}. This project builds {article} {capabilityLower} using {tech} to help them {goal}.",
+    "For {users}, {pain} remains a persistent, everyday friction point. This project proposes {article} {capabilityLower}, built on {tech}, so they can {goal}.",
+    "{Users} typically lack an easy way to handle {pain}. Using {tech}, this project delivers {article} {capabilityLower} that helps them {goal}."
+  ];
+  const PROJECT_ROADMAP = [
+    ["Weeks 1–2","Requirement Gathering & Tech Study","Finalise scope, study the chosen tech stack, and survey a few existing solutions."],
+    ["Weeks 3–5","Design & Prototyping","System design, wireframes or architecture diagram, and a throwaway proof-of-concept."],
+    ["Weeks 6–11","Core Development","Implement core features iteratively, with a short weekly demo to track progress."],
+    ["Weeks 12–14","Testing & Integration","Unit/integration testing, bug fixing, and usability or performance checks."],
+    ["Weeks 15–16","Documentation & Demo Prep","Final report, user guide, deployment, and a rehearsed presentation/demo."]
+  ];
+
+  function resolveTechProfile(raw){
+    const text = raw.trim().toLowerCase();
+    for(const key in PROJECT_TECH_PROFILES){
+      const p = PROJECT_TECH_PROFILES[key];
+      if(text===key || p.keywords.some(kw=>text.includes(kw))) return {key, profile:p};
+    }
+    const generic = Object.assign({}, GENERIC_TECH_PROFILE, { display: titleCase(raw.trim()), stack:[raw.trim(), ...GENERIC_TECH_PROFILE.stack] });
+    return {key:'generic', profile:generic};
+  }
+  function articleFor(word){ return /^[aeiou]/i.test(word) ? 'an' : 'a'; }
+  function weightedDifficulty(rng){
+    const r = rng();
+    if(r < 0.25) return 'Easy';
+    if(r < 0.75) return 'Medium';
+    return 'Hard';
+  }
+  function shuffleArr(rng, arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){ const j = Math.floor(rng()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    return a;
+  }
+
+  function buildProjectList(rng, profile, domains, count){
+    const combos = [];
+    for(let d=0; d<domains.length; d++) for(let c=0;c<profile.capabilities.length;c++) combos.push([d,c]);
+    let shuffled = shuffleArr(rng, combos);
+    while(shuffled.length < count) shuffled = shuffled.concat(shuffleArr(rng, combos));
+    shuffled = shuffled.slice(0, count);
+
+    const usedTitles = new Set();
+    return shuffled.map(([dIdx,cIdx])=>{
+      const domain = domains[dIdx];
+      const capability = profile.capabilities[cIdx];
+      const usersShort = titleCase(domain.users.split(' and ')[0]);
+
+      let title, attempt=0;
+      do{
+        const tpl = pick(rng, PROJECT_TITLE_TEMPLATES);
+        title = tpl.replace('{capability}',capability).replace('{users}',usersShort).replace('{tech}',profile.display);
+        attempt++;
+      } while(usedTitles.has(title) && attempt < 4);
+      usedTitles.add(title);
+
+      const ptpl = pick(rng, PROJECT_PROBLEM_TEMPLATES);
+      const problem = ptpl
+        .replace('{Users}', domain.users.charAt(0).toUpperCase()+domain.users.slice(1))
+        .replace('{users}', domain.users)
+        .replace('{pain}', domain.pain)
+        .replace('{article}', articleFor(capability))
+        .replace('{capabilityLower}', capability.toLowerCase())
+        .replace('{tech}', profile.display)
+        .replace('{goal}', domain.goal);
+
+      return {
+        title, domain: domain.name, problem,
+        stack: pickN(rng, profile.stack, Math.min(4, profile.stack.length)),
+        features: pickN(rng, profile.features, Math.min(4, profile.features.length)),
+        deliverables: pickN(rng, profile.deliverables, Math.min(3, profile.deliverables.length)),
+        difficulty: weightedDifficulty(rng)
+      };
+    });
+  }
+
+  function escHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  /* Diagram engine: written as a plain, self-contained function so its
+     source (via .toString()) can be dropped verbatim into each generated,
+     standalone catalog file — it never runs in this page, only in the
+     downloaded one. Given a project's title/domain/stack/features/
+     deliverables it synthesises a generic ER Diagram, Mindmap, Flow
+     Diagram, and DFD (Levels 0/1/2) entirely client-side, no network. */
+  function ProjectDiagramEngine(PROJECTS){
+    function esc(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function wrap(text, maxChars){
+      const words = String(text).split(' ');
+      const lines = []; let cur = '';
+      words.forEach(w=>{
+        if((cur+' '+w).trim().length > maxChars && cur){ lines.push(cur.trim()); cur = w; }
+        else cur = (cur ? cur+' ' : '') + w;
+      });
+      if(cur) lines.push(cur.trim());
+      return lines.length ? lines : [''];
+    }
+    function tblock(x,y,text,maxChars,lh,opts){
+      opts = opts || {};
+      const lines = wrap(text, maxChars);
+      const anchor = opts.anchor || 'middle';
+      const weight = opts.weight || 400;
+      const size = opts.size || 12;
+      const fill = opts.fill || '#1C1B1F';
+      let out = '';
+      lines.forEach((line,i)=>{
+        out += `<text x="${x}" y="${y + i*lh}" text-anchor="${anchor}" font-size="${size}" font-weight="${weight}" fill="${fill}" font-family="Inter, sans-serif">${esc(line)}</text>`;
+      });
+      return out;
+    }
+    function box(x,y,w,h,opts){
+      opts = opts || {};
+      const rx = opts.rx != null ? opts.rx : 8;
+      return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${opts.fill||'#fff'}" stroke="${opts.stroke||'#CBCFD8'}" stroke-width="${opts.sw||1.5}"/>`;
+    }
+    function arrow(x1,y1,x2,y2,opts){
+      opts = opts || {};
+      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${opts.stroke||'#8891A0'}" stroke-width="1.6" marker-end="url(#arrowhead)"/>`;
+    }
+    const DEFS = `<defs><marker id="arrowhead" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8891A0"/></marker></defs>`;
+    const STOP = ['for','the','a','an','of','system','tool','platform','app','application','engine','dashboard','generator','tracker','assistant','with','and','smart','based'];
+    function mainNoun(capability){
+      const words = String(capability).replace(/[():]/g,'').split(' ').filter(w=>w && !STOP.includes(w.toLowerCase()));
+      return words[words.length-1] || 'Record';
+    }
+    function svgWrap(inner, vb){ return `<svg viewBox="0 0 ${vb[0]} ${vb[1]}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:#fff">${inner}</svg>`; }
+
+    function buildER(p){
+      const main = mainNoun((p.title.split(' for ')[0]||p.title).split(':')[0]);
+      const entities = [
+        {name:'User', attrs:['user_id (PK)','name','email','password_hash','role']},
+        {name:main, attrs:['id (PK)','title','status','created_by (FK → User)','created_at']},
+        {name:'Admin', attrs:['admin_id (PK)','name','email','permissions']},
+        {name:'Notification', attrs:['notif_id (PK)','user_id (FK → User)','message','is_read','timestamp']},
+        {name:'ActivityLog', attrs:['log_id (PK)',`ref_id (FK → ${main})`,'action','timestamp']}
+      ];
+      const pos = [{x:30,y:30},{x:360,y:190},{x:690,y:30},{x:30,y:350},{x:690,y:350}];
+      const W=200,H=150;
+      let svg = DEFS;
+      entities.forEach((e,i)=>{
+        const q = pos[i];
+        svg += box(q.x,q.y,W,H,{rx:6,fill:'#FBFBFC'});
+        svg += box(q.x,q.y,W,28,{rx:6,fill:'#A11319',stroke:'#A11319'});
+        svg += `<text x="${q.x+W/2}" y="${q.y+19}" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="Inter, sans-serif">${esc(e.name)}</text>`;
+        e.attrs.forEach((a,ai)=> svg += `<text x="${q.x+14}" y="${q.y+48+ai*22}" font-size="10.8" fill="#40404A" font-family="IBM Plex Mono, monospace">${esc(a)}</text>`);
+      });
+      const rels = [
+        {from:0,to:1,label:'creates (1..N)'},
+        {from:2,to:1,label:'manages (1..N)'},
+        {from:1,to:3,label:'triggers (1..N)'},
+        {from:0,to:3,label:'receives (1..N)'},
+        {from:1,to:4,label:'logged as (1..N)'}
+      ];
+      rels.forEach(r=>{
+        const a=pos[r.from], b=pos[r.to];
+        const x1=a.x+W/2,y1=a.y+H/2,x2=b.x+W/2,y2=b.y+H/2;
+        svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#B8891A" stroke-width="1.3" stroke-dasharray="5 3"/>`;
+        svg += `<text x="${(x1+x2)/2}" y="${(y1+y2)/2-6}" text-anchor="middle" font-size="10.5" fill="#8a6110" font-family="IBM Plex Mono, monospace">${esc(r.label)}</text>`;
+      });
+      return svgWrap(svg,[920,540]);
+    }
+
+    function buildMindmap(p){
+      const branches = [
+        {label:'Domain', items:[p.domain]},
+        {label:'Tech Stack', items:p.stack},
+        {label:'Key Features', items:p.features},
+        {label:'Deliverables', items:p.deliverables},
+        {label:'Difficulty', items:[p.difficulty]}
+      ];
+      // pre-measure each item's wrapped line count so boxes never overlap
+      const MAXC = 40, ITEM_LH = 14, ITEM_PAD = 14, ITEM_GAP = 10;
+      branches.forEach(b=>{
+        b._h = b.items.map(it=>{
+          const lines = wrap(it, MAXC).length;
+          const h = Math.max(26, lines*ITEM_LH + ITEM_PAD);
+          return h;
+        });
+        b._totalH = b._h.reduce((s,h)=>s+h+ITEM_GAP, -ITEM_GAP);
+      });
+      let svg = DEFS;
+      const cx=170;
+      let y = 30;
+      const rowStarts = [];
+      branches.forEach(b=>{
+        rowStarts.push(y);
+        y += Math.max(60, b._totalH) + 46;
+      });
+      const totalH = y + 20;
+      const cy = totalH/2;
+      svg += box(cx-150,cy-42,300,84,{rx:40,fill:'#A11319',stroke:'#A11319'});
+      svg += tblock(cx,cy,p.title,28,16,{anchor:'middle',size:12.5,weight:700,fill:'#fff'});
+      branches.forEach((b,bi)=>{
+        const bx = 470;
+        const rowH = Math.max(60, b._totalH);
+        const by = rowStarts[bi] + rowH/2 - 19;
+        svg += `<path d="M ${cx+150} ${cy} C ${cx+280} ${cy}, ${bx-90} ${by+20}, ${bx} ${by+20}" stroke="#CBCFD8" stroke-width="1.5" fill="none"/>`;
+        svg += box(bx,by,170,38,{rx:19,fill:'#FBF1DC',stroke:'#B8891A'});
+        svg += `<text x="${bx+85}" y="${by+24}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#8a6110" font-family="Inter, sans-serif">${esc(b.label)}</text>`;
+        const branchMidY = by+19;
+        let itemY = branchMidY - b._totalH/2;
+        b.items.forEach((it,ii)=>{
+          const h = b._h[ii];
+          const ix = bx+210;
+          svg += `<line x1="${bx+170}" y1="${branchMidY}" x2="${ix}" y2="${itemY+h/2}" stroke="#E3E5EA" stroke-width="1.2"/>`;
+          svg += box(ix,itemY,230,h,{rx:6,fill:'#fff'});
+          const lineCount = wrap(it, MAXC).length;
+          const textStartY = itemY + h/2 - ((lineCount-1)*ITEM_LH)/2 + 4;
+          svg += tblock(ix+10,textStartY,it,MAXC,ITEM_LH,{anchor:'start',size:10.6});
+          itemY += h + ITEM_GAP;
+        });
+      });
+      return svgWrap(svg,[960,totalH]);
+    }
+
+    function buildFlow(p){
+      const steps = ['Start', 'User Login / Registration'].concat(p.features).concat(['Generate Output / Results','End']);
+      let svg = DEFS;
+      const cx=460, w=360, h=52, gap=28;
+      let y=30;
+      steps.forEach((s,i)=>{
+        const term = (i===0 || i===steps.length-1);
+        if(term){
+          svg += box(cx-100,y,200,h,{rx:26,fill:'#FDEAEA',stroke:'#E31E24'});
+          svg += tblock(cx,y+h/2+5,s,20,14,{anchor:'middle',size:13,weight:700,fill:'#A11319'});
+        } else {
+          svg += box(cx-w/2,y,w,h,{rx:8,fill:'#fff'});
+          svg += tblock(cx,y+h/2+5,s,42,13,{anchor:'middle',size:12});
+        }
+        if(i<steps.length-1) svg += arrow(cx,y+h,cx,y+h+gap);
+        y += h+gap;
+      });
+      return svgWrap(svg,[920,y+10]);
+    }
+
+    function buildDFD0(p){
+      let svg = DEFS;
+      const sx=350,sy=170,sw=220,sh=140;
+      svg += `<ellipse cx="${sx+sw/2}" cy="${sy+sh/2}" rx="${sw/2}" ry="${sh/2}" fill="#FDEAEA" stroke="#E31E24" stroke-width="1.8"/>`;
+      svg += `<text x="${sx+sw/2}" y="${sy+sh/2-16}" text-anchor="middle" font-size="18" font-weight="700" fill="#A11319" font-family="Inter, sans-serif">0</text>`;
+      svg += tblock(sx+sw/2,sy+sh/2+8,p.title,24,14,{anchor:'middle',size:11.5,weight:600,fill:'#40404A'});
+      svg += box(30,50,180,70,{fill:'#FBF1DC',stroke:'#B8891A'});
+      svg += `<text x="120" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6110" font-family="Inter, sans-serif">User</text>`;
+      svg += box(710,50,180,70,{fill:'#FBF1DC',stroke:'#B8891A'});
+      svg += `<text x="800" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6110" font-family="Inter, sans-serif">Admin</text>`;
+      svg += box(30,310,180,70,{fill:'#FBF1DC',stroke:'#B8891A'});
+      svg += `<text x="120" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6110" font-family="Inter, sans-serif">Database</text>`;
+      svg += arrow(210,90,350,220);
+      svg += tblock(275,80,'requests / input data',22,12,{anchor:'middle',size:10});
+      svg += arrow(570,220,710,90);
+      svg += tblock(645,80,'reports / responses',22,12,{anchor:'middle',size:10});
+      svg += arrow(400,310,210,345);
+      svg += tblock(300,295,'stores / retrieves data',24,12,{anchor:'middle',size:10});
+      return svgWrap(svg,[920,420]);
+    }
+
+    function buildDFD1(p){
+      const procs = (p.features.length?p.features:['Core Processing']).map((f,i)=>({num:(i+1)+'.0', label:f}));
+      let svg = DEFS;
+      const positions = [{x:340,y:30},{x:340,y:180},{x:340,y:330},{x:340,y:480}];
+      svg += box(20,230,160,60,{fill:'#FBF1DC',stroke:'#B8891A'});
+      svg += `<text x="100" y="265" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6110" font-family="Inter, sans-serif">User</text>`;
+      svg += box(720,230,160,60,{fill:'#FBF1DC',stroke:'#B8891A'});
+      svg += `<text x="800" y="265" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6110" font-family="Inter, sans-serif">Admin</text>`;
+      svg += box(700,440,180,55,{fill:'#fff',stroke:'#5B6472'});
+      svg += `<text x="790" y="472" text-anchor="middle" font-size="12" font-weight="600" fill="#1C1B1F" font-family="IBM Plex Mono, monospace">D1: Main DB</text>`;
+      procs.forEach((proc,i)=>{
+        const q = positions[i];
+        svg += `<circle cx="${q.x+85}" cy="${q.y+35}" r="78" fill="#FDEAEA" stroke="#E31E24" stroke-width="1.6"/>`;
+        svg += `<text x="${q.x+85}" y="${q.y+22}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#A11319" font-family="Inter, sans-serif">${esc(proc.num)}</text>`;
+        svg += tblock(q.x+85,q.y+40,proc.label,20,11,{anchor:'middle',size:10.2,fill:'#40404A'});
+        if(i===0) svg += arrow(180,260,q.x+7,q.y+35);
+        if(i===procs.length-1) svg += arrow(q.x+163,q.y+35,700,465);
+        if(i>0){ const prev=positions[i-1]; svg += arrow(prev.x+85,prev.y+70,q.x+85,q.y); }
+        if(i%2===1) svg += arrow(q.x+163,q.y+35,720,260);
+      });
+      return svgWrap(svg,[920,600]);
+    }
+
+    function buildDFD2(p){
+      const parent = p.features[0] || 'Core Processing';
+      const subs = ['Input Validation & Auth', `Core Logic: ${parent}`, 'Output Formatting', 'Store / Update Records'];
+      let svg = DEFS;
+      const positions = [{x:30,y:200},{x:250,y:200},{x:470,y:200},{x:470,y:380}];
+      svg += box(30,30,780,60,{rx:6,fill:'#FBF1DC',stroke:'#B8891A'});
+      svg += tblock(420,65,`Decomposition of Process 1.0 — ${parent}`,60,13,{anchor:'middle',size:12,weight:700,fill:'#8a6110'});
+      subs.forEach((s,i)=>{
+        const q = positions[i];
+        svg += `<circle cx="${q.x+75}" cy="${q.y+40}" r="72" fill="#FDEAEA" stroke="#E31E24" stroke-width="1.6"/>`;
+        svg += `<text x="${q.x+75}" y="${q.y+24}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#A11319" font-family="Inter, sans-serif">1.${i+1}</text>`;
+        svg += tblock(q.x+75,q.y+44,s,20,10,{anchor:'middle',size:9.8,fill:'#40404A'});
+        if(i>0 && i<3){ const prev=positions[i-1]; svg += arrow(prev.x+147,prev.y+40,q.x+3,q.y+40); }
+      });
+      svg += arrow(542,240,542,380);
+      svg += box(680,380,140,60,{fill:'#fff',stroke:'#5B6472'});
+      svg += `<text x="750" y="415" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1C1B1F" font-family="IBM Plex Mono, monospace">D1: Main DB</text>`;
+      svg += arrow(618,410,680,410);
+      return svgWrap(svg,[920,500]);
+    }
+
+    let state = {index:0, tab:'er', lvl:'0'};
+    function ensureModal(){
+      if(document.getElementById('diagram-modal')) return;
+      const modal = document.createElement('div');
+      modal.id = 'diagram-modal';
+      modal.innerHTML = `
+        <div class="dm-backdrop"></div>
+        <div class="dm-panel">
+          <div class="dm-head">
+            <div>
+              <div class="dm-eyebrow">Auto-generated Diagram Set</div>
+              <h3 class="dm-title" id="dm-title"></h3>
+            </div>
+            <button class="dm-close" id="dm-close" aria-label="Close">&times;</button>
+          </div>
+          <div class="dm-tabs" id="dm-tabs">
+            <button class="dm-tab active" data-tab="er">ER Diagram</button>
+            <button class="dm-tab" data-tab="mindmap">Mindmap</button>
+            <button class="dm-tab" data-tab="flow">Flow Diagram</button>
+            <button class="dm-tab" data-tab="dfd">DFD</button>
+          </div>
+          <div class="dm-subtabs" id="dm-subtabs" style="display:none;">
+            <button class="dm-subtab active" data-lvl="0">Level 0 — Context</button>
+            <button class="dm-subtab" data-lvl="1">Level 1</button>
+            <button class="dm-subtab" data-lvl="2">Level 2</button>
+          </div>
+          <div class="dm-body" id="dm-body"></div>
+          <div class="dm-note">Auto-generated from this project brief as a structural starting point — refine entities, processes and flows to match your team's actual design.</div>
+        </div>`;
+      document.body.appendChild(modal);
+      document.getElementById('dm-close').onclick = closeModal;
+      modal.querySelector('.dm-backdrop').onclick = closeModal;
+      modal.querySelectorAll('.dm-tab').forEach(btn=>{
+        btn.onclick = ()=>{
+          modal.querySelectorAll('.dm-tab').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          state.tab = btn.getAttribute('data-tab');
+          document.getElementById('dm-subtabs').style.display = state.tab==='dfd' ? 'flex' : 'none';
+          render();
+        };
+      });
+      modal.querySelectorAll('.dm-subtab').forEach(btn=>{
+        btn.onclick = ()=>{
+          modal.querySelectorAll('.dm-subtab').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          state.lvl = btn.getAttribute('data-lvl');
+          render();
+        };
+      });
+    }
+    function render(){
+      const p = PROJECTS[state.index];
+      const body = document.getElementById('dm-body');
+      if(state.tab==='er') body.innerHTML = buildER(p);
+      else if(state.tab==='mindmap') body.innerHTML = buildMindmap(p);
+      else if(state.tab==='flow') body.innerHTML = buildFlow(p);
+      else if(state.tab==='dfd'){
+        body.innerHTML = state.lvl==='0'?buildDFD0(p):(state.lvl==='1'?buildDFD1(p):buildDFD2(p));
+      }
+    }
+    function closeModal(){ const m=document.getElementById('diagram-modal'); if(m) m.classList.remove('open'); document.body.style.overflow=''; }
+    function openModal(index){
+      ensureModal();
+      state = {index, tab:'er', lvl:'0'};
+      const modal = document.getElementById('diagram-modal');
+      document.getElementById('dm-title').textContent = PROJECTS[index].title;
+      modal.querySelectorAll('.dm-tab').forEach((b,i)=>b.classList.toggle('active', i===0));
+      document.getElementById('dm-subtabs').style.display = 'none';
+      modal.querySelectorAll('.dm-subtab').forEach((b,i)=>b.classList.toggle('active', i===0));
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      render();
+    }
+    window.openProjectDiagrams = openModal;
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+  }
+
+  function buildProjectCatalogHtml(techDisplay, projects, meta){
+    const diffClass = d => d.toLowerCase();
+    const indexItems = projects.map((p,i)=>`
+      <div class="index-row">
+        <a class="index-card" href="#sheet-${i+1}">
+          <span class="index-num">${String(i+1).padStart(2,'0')}</span>
+          <span class="index-body">
+            <span class="index-title">${escHtml(p.title)}</span>
+            <span class="index-domain">${escHtml(p.domain)}</span>
+          </span>
+          <span class="index-diff diff-${diffClass(p.difficulty)}">${escHtml(p.difficulty)}</span>
+        </a>
+        <button type="button" class="index-diagram-ic" onclick="openProjectDiagrams(${i})" title="Auto-generate ER / Mindmap / Flow / DFD diagrams">&#9671;</button>
+      </div>`).join('');
+
+    const roadmapItems = PROJECT_ROADMAP.map(([w,t,d])=>`
+      <div class="road-step">
+        <div class="road-week">${escHtml(w)}</div>
+        <div class="road-title">${escHtml(t)}</div>
+        <div class="road-desc">${escHtml(d)}</div>
+      </div>`).join('');
+
+    const sheets = projects.map((p,i)=>`
+      <section class="sheet" id="sheet-${i+1}">
+        <div class="sheet-header">
+          <span class="sheet-num">Sheet ${String(i+1).padStart(2,'0')}</span>
+          <span class="sheet-domain">${escHtml(p.domain)}</span>
+          <span class="sheet-diff diff-${diffClass(p.difficulty)}">${escHtml(p.difficulty)}</span>
+        </div>
+        <h2 class="sheet-title clickable" onclick="openProjectDiagrams(${i})" title="Click to auto-generate ER / Mindmap / Flow / DFD diagrams">${escHtml(p.title)}</h2>
+        <button type="button" class="diagram-btn" onclick="openProjectDiagrams(${i})">&#9671; View ER · Mindmap · Flow · DFD Diagrams</button>
+        <p class="sheet-problem">${escHtml(p.problem)}</p>
+        <div class="sheet-grid">
+          <div class="sheet-block"><h3>Tech Stack</h3><p class="stack-line">${p.stack.map(escHtml).join(', ')}</p></div>
+          <div class="sheet-block"><h3>Key Features</h3><ul>${p.features.map(f=>`<li>${escHtml(f)}</li>`).join('')}</ul></div>
+          <div class="sheet-block"><h3>Deliverables</h3><ul>${p.deliverables.map(d=>`<li>${escHtml(d)}</li>`).join('')}</ul></div>
+        </div>
+      </section>`).join('');
+
+    const generatedOn = new Date().toLocaleDateString('en-IN',{year:'numeric',month:'long',day:'numeric'});
+
+    return `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escHtml(meta.title)}</title>
+<style>
+  :root{ --accent:#A11319; --gold:#B8891A; --ink:#1C1B1F; --muted:#5B6472; --border:#E3E5EA; --paper:#FFFFFF; }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#F5F6F8; color:var(--ink); overflow-x:hidden; }
+  .hero{ background:linear-gradient(135deg, var(--accent) 0%, #1C1B1F 130%); color:#F8FAFC; padding:56px 24px 84px; text-align:center; }
+  .hero .eyebrow{ letter-spacing:.14em; text-transform:uppercase; font-size:12px; color:rgba(248,250,252,.75); margin-bottom:14px; font-weight:600; }
+  .hero h1{ font-size:32px; margin:0 0 14px; letter-spacing:.01em; }
+  .hero .meta-line{ font-size:14px; color:rgba(248,250,252,.85); margin-bottom:10px; }
+  .hero .meta-note{ max-width:700px; margin:0 auto; font-size:13px; color:rgba(248,250,252,.7); line-height:1.6; }
+  main{ max-width:980px; margin:-48px auto 0; padding:0 20px 40px; }
+  .card{ background:var(--paper); border-radius:16px; box-shadow:0 6px 20px rgba(2,6,23,.08); padding:26px 30px; margin-bottom:22px; }
+  .card h2{ font-size:19px; margin:0 0 16px; }
+  .roadmap{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .road-step{ border:1px solid var(--border); border-radius:10px; padding:12px; }
+  .road-week{ font-size:11px; font-weight:700; color:var(--accent); margin-bottom:4px; }
+  .road-title{ font-size:12.5px; font-weight:700; margin-bottom:4px; }
+  .road-desc{ font-size:11.5px; color:var(--muted); line-height:1.5; }
+  .index-list{ display:grid; grid-template-columns:1fr 1fr; gap:10px; min-width:0; }
+  .index-card{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); border:1px solid var(--border); border-radius:10px; padding:10px 12px; min-width:0; max-width:100%; overflow:hidden; }
+  .index-card:hover{ border-color:var(--accent); }
+  .index-num{ font-size:11px; color:var(--muted); font-weight:700; flex:none; }
+  .index-body{ display:flex; flex-direction:column; flex:1; min-width:0; }
+  .index-title{ font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .index-domain{ font-size:11px; color:var(--muted); }
+  .index-diff{ font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:999px; flex:none; }
+  .diff-easy{ background:#dcfce7; color:#15803d; } .diff-medium{ background:#fef3c7; color:#b45309; } .diff-hard{ background:#fee2e2; color:#dc2626; }
+  .sheet{ background:var(--paper); border-radius:16px; box-shadow:0 6px 20px rgba(2,6,23,.08); padding:26px 30px; margin-bottom:20px; scroll-margin-top:20px; }
+  .sheet-header{ display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+  .sheet-num{ font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.05em; }
+  .sheet-domain{ font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; background:#FBF1DC; color:var(--gold); }
+  .sheet-diff{ font-size:10.5px; font-weight:700; padding:3px 10px; border-radius:999px; }
+  .sheet-title{ font-size:20px; margin:6px 0 8px; }
+  .sheet-problem{ color:var(--muted); line-height:1.65; margin:0 0 16px; font-size:14px; }
+  .sheet-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; }
+  .sheet-block h3{ font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); margin:0 0 8px; }
+  .sheet-block ul{ margin:0; padding-left:18px; font-size:13px; line-height:1.6; }
+  .stack-line{ font-size:13px; line-height:1.6; margin:0; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; padding:8px 0 36px; }
+  @media (max-width:760px){ .roadmap{grid-template-columns:1fr 1fr;} .index-list{grid-template-columns:1fr;} .sheet-grid{grid-template-columns:1fr;} .hero h1{font-size:25px;} }
+
+  .index-row{ display:flex; align-items:center; gap:8px; min-width:0; }
+  .index-row .index-card{ flex:1; min-width:0; }
+  .index-diagram-ic{ flex:none; width:28px; height:28px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--accent); background:#fff; cursor:pointer; }
+  .index-diagram-ic:hover{ border-color:var(--accent); background:#FDEAEA; }
+  .sheet-title.clickable{ cursor:pointer; }
+  .sheet-title.clickable:hover{ color:var(--accent); text-decoration:underline; }
+  .diagram-btn{ display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--accent); background:#FDEAEA; border:1px solid var(--accent); padding:7px 14px; border-radius:8px; cursor:pointer; margin:0 0 16px; }
+  .diagram-btn:hover{ background:var(--accent); color:#fff; }
+
+  #diagram-modal{ position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; padding:20px; }
+  #diagram-modal.open{ display:flex; }
+  .dm-backdrop{ position:absolute; inset:0; background:rgba(28,27,31,.55); }
+  .dm-panel{ position:relative; background:#fff; border-radius:16px; width:min(980px,96vw); max-height:92vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); padding:22px 24px 26px; }
+  .dm-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px; }
+  .dm-eyebrow{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:4px; }
+  .dm-title{ font-size:18px; margin:0; max-width:760px; }
+  .dm-close{ border:none; background:#F2F2F4; width:32px; height:32px; border-radius:50%; font-size:18px; cursor:pointer; line-height:1; color:var(--muted); flex:none; }
+  .dm-close:hover{ background:#E3E5EA; }
+  .dm-tabs, .dm-subtabs{ display:flex; gap:6px; border-bottom:1px solid var(--border); margin-bottom:14px; flex-wrap:wrap; }
+  .dm-subtabs{ margin-top:-8px; }
+  .dm-tab, .dm-subtab{ border:none; background:none; padding:9px 14px; font-size:13px; font-weight:600; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; }
+  .dm-tab.active, .dm-subtab.active{ color:var(--accent); border-bottom-color:var(--accent); }
+  .dm-body{ border:1px solid var(--border); border-radius:10px; padding:10px; overflow-x:auto; background:#fafafa; }
+  .dm-note{ font-size:11.5px; color:var(--muted); margin-top:12px; line-height:1.6; }
+</style></head>
+<body>
+<div class="hero">
+  <div class="eyebrow">Project Lab Catalog · ${escHtml(techDisplay)}</div>
+  <h1>${escHtml(meta.title)}</h1>
+  <div class="meta-line">${escHtml(meta.sem)} Semester &middot; ${projects.length} Sheets &middot; Software-Only &middot; ${escHtml(meta.duration)} (${escHtml(meta.weeks)}) &middot; Team of ${escHtml(meta.teamSize)}</div>
+  <p class="meta-note">Generated for the <strong>${escHtml(techDisplay)}</strong> track &middot; all ${projects.length} projects are software-only, buildable with free/open-source tools, and scoped for a ${escHtml(meta.teamSize)}-member team within a ${escHtml(meta.duration)} (${escHtml(meta.weeks)}) lab cycle. Generated ${generatedOn} for Dr. Abhishek Bhattacherjee, Dept. of CSE, MM(DU) Mullana–Ambala.</p>
+</div>
+<main>
+  <div class="card"><h2>Suggested 16-Week Roadmap</h2><div class="roadmap">${roadmapItems}</div></div>
+  <div class="card"><h2>Sheet Index — ${projects.length} ${escHtml(techDisplay)} Projects</h2><div class="index-list">${indexItems}</div></div>
+  ${sheets}
+  <footer>Generated automatically for the ${escHtml(techDisplay)} track · open this generator again for a brand-new set of projects</footer>
+</main>
+<script>
+(${ProjectDiagramEngine.toString()})(${JSON.stringify(projects.map(p=>({
+    title: p.title, domain: p.domain, stack: p.stack, features: p.features,
+    deliverables: p.deliverables, difficulty: p.difficulty
+  })))});
+<\/script>
+</body></html>`;
+  }
+
+  function generateProjects(){
+    const raw = document.getElementById('project-topic').value.trim();
+    if(!raw){ setStatus('project-status','Please enter a technology first.','err'); return; }
+    setStatus('project-status','Assembling a 20-project catalog…','busy');
+    document.getElementById('project-btn').disabled = true;
+
+    setTimeout(()=>{
+      try{
+        const rng = mulberry32(hashSeed(raw+'_projects_'+Date.now()));
+        const { profile } = resolveTechProfile(raw);
+        const projects = buildProjectList(rng, profile, PROJECT_DOMAINS, 20);
+        const meta = { title:`B.Tech CSE 7th Sem — ${profile.display} Project Lab`, sem:'7th', teamSize:'4', duration:'3-Month', weeks:'16 Weeks' };
+        const htmlOut = buildProjectCatalogHtml(profile.display, projects, meta);
+        const blob = new Blob([htmlOut], {type:'text/html;charset=utf-8'});
+        downloadBlob(blob, `${safeFilename(profile.display)}_Project_Catalog.html`);
+        setStatus('project-status',`Downloaded — 20 fresh ${profile.display} project briefs with a shared roadmap. Open the file in any browser.`,'ok');
+        toast('Project catalog downloaded.');
+      }catch(e){
+        console.error(e);
+        setStatus('project-status','Something went wrong generating the catalog. Please try again.','err');
+        toast('Could not generate the catalog. Please try again.', true);
+      }finally{
+        document.getElementById('project-btn').disabled = false;
+      }
+    }, 250);
+  }
+
+  return { generateProjects };
+})();
+
+document.getElementById('project-topic').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); Dossier.generateProjects(); } });
+
+document.querySelectorAll('.chip-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.getElementById('project-topic').value = btn.getAttribute('data-tech');
+    document.getElementById('project-topic').focus();
+  });
+});
+</script>
+
+</body>
+</html>
