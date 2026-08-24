@@ -146,7 +146,7 @@
         <div class="card-copy">
           <p class="kicker">Student Projects · Draft Assistance</p>
           <h3>Project Idea Generator</h3>
-          <p class="story">Works for Python, Web Development, Machine Learning, Cybersecurity, Mobile Development, Cloud Computing, Blockchain, Computer Vision, NLP, Data Science, Game Development, AR/VR, DBMS, IoT — or type any other technology and it will still generate a full catalog around it.</p>
+          <p class="story">Works for Python, Web Development, Machine Learning, Cybersecurity, Mobile Development, Cloud Computing, Blockchain, Computer Vision, NLP, Data Science, Game Development, AR/VR, DBMS, IoT, Robotics, Big Data, DevOps, Computer Networks, Operating Systems, Software Testing, HCI, Distributed Systems, Compiler Design, Quantum Computing, Bioinformatics, Computer Graphics — or type any other technology and it will still generate a full, topic-tailored catalog around it.</p>
         </div>
       </div>
       <div class="gen-panel">
@@ -174,11 +174,23 @@
           <button class="chip-btn" type="button" data-tech="AR/VR">AR/VR</button>
           <button class="chip-btn" type="button" data-tech="DBMS">DBMS</button>
           <button class="chip-btn" type="button" data-tech="IoT">IoT</button>
+          <button class="chip-btn" type="button" data-tech="Robotics">Robotics</button>
+          <button class="chip-btn" type="button" data-tech="Big Data">Big Data</button>
+          <button class="chip-btn" type="button" data-tech="DevOps">DevOps</button>
+          <button class="chip-btn" type="button" data-tech="Computer Networks">Computer Networks</button>
+          <button class="chip-btn" type="button" data-tech="Operating Systems">Operating Systems</button>
+          <button class="chip-btn" type="button" data-tech="Software Testing">Software Testing</button>
+          <button class="chip-btn" type="button" data-tech="Human-Computer Interaction">HCI</button>
+          <button class="chip-btn" type="button" data-tech="Distributed Systems">Distributed Systems</button>
+          <button class="chip-btn" type="button" data-tech="Compiler Design">Compiler Design</button>
+          <button class="chip-btn" type="button" data-tech="Quantum Computing">Quantum Computing</button>
+          <button class="chip-btn" type="button" data-tech="Bioinformatics">Bioinformatics</button>
+          <button class="chip-btn" type="button" data-tech="Computer Graphics">Computer Graphics</button>
         </div>
 
         <details class="disclosure">
           <summary>How this catalog is built</summary>
-          <p>Built entirely in your browser by combining the chosen technology with a bank of real-world problem domains — no server, nothing uploaded, and no external code is loaded or exposed to produce it. Every one of the 20 briefs is written out in full (problem, stack, features, deliverables) — nothing is left blank. In the downloaded catalog, clicking any idea's title (or its ◇ icon) instantly opens its ER Diagram, Mindmap, Flow Diagram, and DFD at Levels 0/1/2 — all synthesised from that idea's own domain, stack and features, no server call involved. Treat each brief and diagram set as a strong starting point for a student team to scope and refine, not a final specification.</p>
+          <p>Built entirely in your browser by combining the chosen technology with a bank of real-world problem domains — no server, nothing uploaded, and no external code is loaded or exposed to produce it. Every one of the 20 briefs is written out in full (problem, stack, features, deliverables) — nothing is left blank. For technologies without a hand-built profile, the generator still tailors the stack, capability names and features to the exact topic you typed, so any CSE elective — not just the fourteen quick-pick chips — gets a genuinely topic-specific catalog rather than a generic placeholder one. In the downloaded catalog, clicking any idea's title (or its ◇ icon) instantly opens its ER Diagram, Mindmap, Flow Diagram, and DFD at Levels 0/1/2 — all synthesised from that idea's own domain, stack and features, no server call involved. Treat each brief and diagram set as a strong starting point for a student team to scope and refine, not a final specification.</p>
         </details>
 
         <div class="sample-strip">
@@ -349,7 +361,67 @@ const Dossier = (() => {
       stack:["Python","MQTT (simulated broker)","Node-RED","InfluxDB + Grafana","Flask"],
       capabilities:["Simulated Sensor Dashboard","Smart-Home Automation Simulator","Predictive-Maintenance Simulator","Environmental-Monitoring Dashboard","Fleet-Tracking Simulator","Energy-Usage Monitoring Dashboard","Smart-Agriculture Dashboard Simulator","Alert & Automation Rule Engine"],
       features:["Simulated sensor data stream (MQTT)","Rule-based automation triggers","Real-time dashboard visualisation","Historical data logging & trend charts","Alert/notification system","Configurable virtual device fleet"],
-      deliverables:["Working simulation dashboard (no physical hardware required)","Simulated data-generator scripts","Automation-rule documentation","System architecture diagram"] }
+      deliverables:["Working simulation dashboard (no physical hardware required)","Simulated data-generator scripts","Automation-rule documentation","System architecture diagram"] },
+    robotics:{ display:"Robotics (Software Simulation)", keywords:["robotics","robot","autonomous vehicle","drone"],
+      stack:["Python","ROS (Robot Operating System)","Gazebo / Webots simulator","OpenCV","Arduino (simulated via Wokwi)"],
+      capabilities:["Path-Planning Simulator","Obstacle-Avoidance System","Robotic Arm Control Simulator","Autonomous Navigation Demo","Swarm-Coordination Simulator","Line-Following Robot Simulator","Drone-Delivery Route Planner","Robot Task-Scheduling System"],
+      features:["Simulated sensor input (LIDAR/ultrasonic)","Path-planning & obstacle-avoidance algorithms","Real-time simulation visualisation","Configurable robot/environment parameters","Performance logging & metrics","Manual override / teleoperation mode"],
+      deliverables:["Working robotics simulation (Gazebo/Webots)","Control algorithm source code","Simulation demo video/recording","Performance evaluation report"] },
+    big_data:{ display:"Big Data", keywords:["big data","hadoop","spark","data engineering"],
+      stack:["Apache Spark (PySpark)","Hadoop HDFS (or local simulation)","Python","Apache Kafka","SQL"],
+      capabilities:["Distributed Data-Processing Pipeline","Real-Time Stream Analytics Tool","Large-Scale Log Analyzer","Batch ETL Pipeline","Data-Lake Query Tool","Recommendation Engine at Scale","Trend-Detection Pipeline","Data-Quality Monitoring Tool"],
+      features:["Distributed batch/stream processing pipeline","Fault-tolerant data ingestion","Scalable storage design (data lake/warehouse)","Interactive query & visualisation layer","Automated data-quality checks","Performance benchmarking across dataset sizes"],
+      deliverables:["Working big-data pipeline (demo scale)","Pipeline architecture diagram","Sample processed dataset & queries","Performance/benchmark report"] },
+    devops:{ display:"DevOps", keywords:["devops","ci/cd","site reliability","sre"],
+      stack:["Docker","GitHub Actions / Jenkins","Kubernetes (basic)","Terraform (basic IaC)","Prometheus + Grafana"],
+      capabilities:["CI/CD Pipeline Template","Automated Deployment Tool","Infrastructure Monitoring Dashboard","Container Orchestration Demo","Release-Management Tool","Incident-Alerting System","Configuration-Management Tool","Rollback & Recovery Automation"],
+      features:["Automated build-test-deploy pipeline","Infrastructure-as-code setup","Centralised monitoring & alerting","Containerised services with orchestration","Automated rollback on failure","Environment-parity (dev/stage/prod) setup"],
+      deliverables:["Working CI/CD pipeline","Infrastructure-as-code scripts","Monitoring dashboard","Deployment & runbook documentation"] },
+    networks:{ display:"Computer Networks", keywords:["computer network","networking","routing","protocol design"],
+      stack:["Python (Scapy/Socket programming)","Cisco Packet Tracer / Mininet","Wireshark","C (for protocol-level work)"],
+      capabilities:["Network-Traffic Analyzer","Custom Routing-Protocol Simulator","Bandwidth-Monitoring Tool","Network-Topology Visualizer","Congestion-Control Simulator","Secure-File-Transfer Utility","Network-Intrusion Simulator","QoS Management Tool"],
+      features:["Packet capture & protocol-level analysis","Simulated multi-node network topology","Real-time traffic/bandwidth visualisation","Custom protocol logic implementation","Fault/failure simulation & recovery","Performance metrics (latency/throughput)"],
+      deliverables:["Working network simulation/tool","Topology & protocol design documentation","Captured-traffic analysis samples","Performance evaluation report"] },
+    os:{ display:"Operating Systems", keywords:["operating system","kernel","process scheduling"],
+      stack:["C","xv6 / Linux kernel modules (simulated)","QEMU / Bochs emulator","Python (for scheduling simulators)"],
+      capabilities:["CPU-Scheduling Simulator","Memory-Management Simulator","Deadlock-Detection Tool","File-System Simulator","Process-Synchronization Demo","Virtual-Memory Paging Simulator","Disk-Scheduling Simulator","Mini Shell / Command Interpreter"],
+      features:["Configurable scheduling/allocation algorithms","Visual simulation of system state over time","Comparative performance across algorithms","Deadlock/resource-conflict detection","Step-by-step execution trace/logging","Editable workload/input configuration"],
+      deliverables:["Working OS-concept simulator","Algorithm comparison report","Source code with inline documentation","Sample test-case results"] },
+    software_testing:{ display:"Software Testing & QA", keywords:["software testing","quality assurance"," qa ","test automation"],
+      stack:["Selenium","PyTest / JUnit","GitHub Actions (CI)","Postman / REST Assured (API testing)"],
+      capabilities:["Automated Test-Suite Runner","Bug-Tracking & Reporting Tool","API-Testing Framework","Regression-Testing Pipeline","Test-Coverage Analyzer","Load/Performance-Testing Tool","Cross-Browser Testing Suite","Test-Case Management System"],
+      features:["Automated test-script execution","Detailed pass/fail reporting & dashboards","Integration with a CI pipeline","Reusable, data-driven test cases","Bug logging with severity/priority tagging","Coverage and performance metrics"],
+      deliverables:["Automated test suite","Test-execution & coverage report","Bug-tracking log/documentation","CI pipeline configuration"] },
+    hci:{ display:"Human-Computer Interaction", keywords:["human-computer interaction","hci","ux design","usability"],
+      stack:["Figma (prototyping)","React","Usability-testing tools (e.g. Maze/Lookback-style workflows)"],
+      capabilities:["Accessible Interface Prototype","Usability-Tested Onboarding Flow","Adaptive UI for Diverse Users","Voice/Gesture-Based Interface Demo","Eye-Tracking-Inspired Interaction Study","Personalised Dashboard UX","Cognitive-Load-Reducing Interface","Inclusive Design Toolkit"],
+      features:["User research & persona-driven design","Interactive high-fidelity prototype","Usability-testing plan & findings","Accessibility (WCAG-aligned) considerations","Iterative design based on user feedback","Heuristic evaluation checklist"],
+      deliverables:["Interactive prototype (Figma/coded)","User research & usability-test report","Design documentation (personas, flows)","Accessibility evaluation summary"] },
+    distributed_systems:{ display:"Distributed Systems", keywords:["distributed system","microservices","consensus algorithm"],
+      stack:["Docker","gRPC / REST","Apache Kafka / RabbitMQ","etcd or a simple Raft implementation"],
+      capabilities:["Microservices Demo Platform","Distributed Task-Queue System","Leader-Election / Consensus Demo","Fault-Tolerant Messaging System","Distributed Cache Simulator","Service-Discovery Tool","Load-Balancing Demo System","Distributed Logging & Tracing Tool"],
+      features:["Multiple independently deployable services","Inter-service communication (gRPC/REST/queue)","Fault-tolerance & failure-recovery handling","Service discovery / load balancing","Distributed logging & tracing","Containerised local multi-node deployment"],
+      deliverables:["Working multi-service demo (Dockerised)","Architecture & communication diagram","Fault-injection test results","Deployment & scaling documentation"] },
+    compiler:{ display:"Compiler Design", keywords:["compiler","interpreter design","lexer","parser design"],
+      stack:["Python or C","ANTLR / Lex-Yacc","AST visualisation libraries"],
+      capabilities:["Mini-Language Compiler","Syntax-Highlighting Tool","Custom Scripting-Language Interpreter","Code-Optimization Demo Tool","Error-Detection & Reporting Tool","Domain-Specific-Language (DSL) Engine","AST Visualizer","Bytecode Generator & Virtual Machine"],
+      features:["Lexical analysis & tokenisation","Grammar-based parsing (AST generation)","Semantic analysis & error reporting","Code generation / interpretation engine","Step-by-step compilation visualisation","Sample-program test suite"],
+      deliverables:["Working compiler/interpreter for a mini-language","Grammar & language specification document","AST/execution visualisation","Test-suite results with sample programs"] },
+    quantum:{ display:"Quantum Computing", keywords:["quantum computing","quantum algorithm","qubit"],
+      stack:["Qiskit","Python","Jupyter Notebook"],
+      capabilities:["Quantum-Algorithm Simulator","Quantum-Circuit Visualizer","Quantum-vs-Classical Benchmark Tool","Quantum-Key-Distribution Demo","Quantum-Search-Algorithm Demo (Grover's)","Quantum-Random-Number Generator","Educational Qubit-State Explorer","Quantum-Error-Correction Demo"],
+      features:["Circuit design using a quantum SDK (simulator)","Visualisation of qubit states / probabilities","Comparison against a classical baseline","Configurable circuit parameters","Result interpretation & explanation layer","Educational walkthrough mode"],
+      deliverables:["Working quantum-circuit simulation","Circuit diagrams & explanation notebook","Benchmark/comparison report","Setup guide for the simulator used"] },
+    bioinformatics:{ display:"Bioinformatics", keywords:["bioinformatics","genomics","computational biology","protein structure"],
+      stack:["Python","Biopython","Public genomic/protein datasets (e.g. NCBI, UniProt)","Pandas"],
+      capabilities:["DNA/Protein Sequence Analyzer","Gene-Expression Visualisation Tool","Disease-Risk Prediction Model","Sequence-Alignment Tool","Phylogenetic-Tree Builder","Protein-Structure Viewer","Mutation-Detection Tool","Biomedical Literature Search Tool"],
+      features:["Sequence data parsing & preprocessing","Alignment / comparison algorithms","Interactive visualisation of biological data","Integration with public biological databases","Statistical/ML-based analysis layer","Exportable analysis reports"],
+      deliverables:["Working bioinformatics analysis tool","Sample dataset & analysis results","Visualisation outputs","Methodology & validation report"] },
+    graphics:{ display:"Computer Graphics", keywords:["computer graphics","rendering","animation engine","3d modeling"],
+      stack:["OpenGL / WebGL","Three.js","C++ or JavaScript","Blender (asset creation)"],
+      capabilities:["3D Scene Renderer","Procedural-Terrain Generator","Real-Time Lighting/Shading Demo","2D/3D Animation Engine","Ray-Tracing Mini-Renderer","Interactive 3D Model Viewer","Particle-Effects System","Geometric-Transformation Playground"],
+      features:["Real-time rendering pipeline","Interactive camera & object controls","Lighting/shading model implementation","Texture mapping & material handling","Performance-optimised rendering (frame rate)","Sample 3D assets/scenes included"],
+      deliverables:["Working real-time graphics demo","Source code with rendering pipeline explained","Sample scene/asset files","Performance benchmarking notes"] }
   };
 
   const PROJECT_TITLE_TEMPLATES = [
@@ -369,14 +441,77 @@ const Dossier = (() => {
     ["Weeks 15–16","Documentation & Demo Prep","Final report, user guide, deployment, and a rehearsed presentation/demo."]
   ];
 
+  /* --- Fallback profile builder for ANY technology typed in that doesn't
+     match one of the hand-built profiles above. Instead of falling back to
+     a bland, generic word list, this synthesises capability names, a
+     tailored stack and topic-flavoured features directly from the typed
+     topic, so arbitrary/obscure CSE electives still get a genuinely
+     topic-specific catalog. --- */
+  const GENERIC_CAPABILITY_TEMPLATES = [
+    "{t} Automation Tool", "{t} Recommendation Engine", "{t} Monitoring Dashboard",
+    "Smart {t} Assistant", "{t} Management Platform", "{t} Tracking System",
+    "{t} Analytics Tool", "{t}-Based Scheduling System", "{t} Verification System",
+    "{t} Simulation & Testing Platform"
+  ];
+  const STACK_HINT_RULES = [
+    [/network|routing|protocol/, ["Network simulation tools (Cisco Packet Tracer / Mininet)","Python (Scapy/Socket programming)"]],
+    [/embedded|hardware|microcontroller|firmware/, ["Arduino / Raspberry Pi (simulated via Wokwi/Tinkercad)","C/C++","Sensor-simulation libraries"]],
+    [/robot|drone|autonomous/, ["ROS (Robot Operating System)","Gazebo / Webots simulator","Python"]],
+    [/quantum/, ["Qiskit","Python","Jupyter Notebook"]],
+    [/graphic|render|animation|3d/, ["OpenGL / WebGL","Three.js","C++ or JavaScript"]],
+    [/test|quality assurance|\bqa\b/, ["Selenium","PyTest / JUnit","CI pipeline (GitHub Actions)"]],
+    [/distributed|parallel|cluster|microservice/, ["Apache Kafka / RabbitMQ","Docker","gRPC"]],
+    [/big ?data|hadoop|spark/, ["Apache Spark (PySpark)","Hadoop HDFS","Python"]],
+    [/compiler|interpreter|lexer|parser/, ["Lexer/parser toolkit (ANTLR / Lex-Yacc)","Python or C"]],
+    [/bioinformatics|genom|protein|computational biology/, ["Biopython","Python","Public genomic/protein datasets"]],
+    [/operating system|\bos\b|kernel|scheduling/, ["C","xv6 / Linux kernel modules (simulated)","QEMU"]],
+    [/human.?computer|\bhci\b|usability|ux /, ["Figma prototyping","React","Usability-testing workflow"]],
+    [/devops|ci\/cd|site reliability/, ["Docker","GitHub Actions","Kubernetes (basic)"]],
+    [/block ?chain|crypto|ledger|smart contract/, ["Solidity","Ethereum (testnet)","Web3.js / Ethers.js"]],
+    [/vision|image processing/, ["OpenCV","Python","TensorFlow / PyTorch"]],
+    [/language|nlp|text/, ["Python","Hugging Face Transformers","spaCy / NLTK"]],
+    [/edge computing|fog computing/, ["Docker","MQTT","Python (edge inference)"]],
+    [/wireless|5g|telecom/, ["NS-3 network simulator","Python","MATLAB (signal modelling)"]],
+    [/database|data management/, ["MySQL / PostgreSQL","SQL","ER modelling tools"]]
+  ];
+  function inferStackHints(topicLower){
+    const hints = [];
+    STACK_HINT_RULES.forEach(([re, arr])=>{ if(re.test(topicLower)) hints.push(...arr); });
+    return hints;
+  }
+  function buildGenericProfile(rawTopic){
+    const display = titleCase(rawTopic.trim());
+    const lower = rawTopic.trim().toLowerCase();
+    const hints = inferStackHints(lower);
+    const stack = [rawTopic.trim(), ...hints, ...GENERIC_TECH_PROFILE.stack]
+      .filter((v,i,a)=> a.findIndex(x=>x.toLowerCase()===v.toLowerCase()) === i);
+    const capabilities = GENERIC_CAPABILITY_TEMPLATES.map(t=> t.replace(/\{t\}/g, display));
+    const features = [
+      `Core ${display.toLowerCase()} workflow tailored to the target users`,
+      ...GENERIC_TECH_PROFILE.features
+    ];
+    const deliverables = [
+      `Working ${display} prototype / application`,
+      ...GENERIC_TECH_PROFILE.deliverables.slice(1)
+    ];
+    return { display, stack, capabilities, features, deliverables };
+  }
+
+  function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  /* Matches a keyword only when it starts at a word boundary in the typed
+     topic (so "blockchain" still matches inside "blockchaining", but short
+     keywords like "ai"/"ar"/"ml"/"os" no longer false-match mid-word, e.g.
+     "ai" inside "chain" or "ar" inside "software"). */
+  function keywordMatches(text, kw){
+    return new RegExp('\\b' + escapeRegex(kw)).test(text);
+  }
   function resolveTechProfile(raw){
     const text = raw.trim().toLowerCase();
     for(const key in PROJECT_TECH_PROFILES){
       const p = PROJECT_TECH_PROFILES[key];
-      if(text===key || p.keywords.some(kw=>text.includes(kw))) return {key, profile:p};
+      if(text===key || p.keywords.some(kw=>keywordMatches(text, kw))) return {key, profile:p};
     }
-    const generic = Object.assign({}, GENERIC_TECH_PROFILE, { display: titleCase(raw.trim()), stack:[raw.trim(), ...GENERIC_TECH_PROFILE.stack] });
-    return {key:'generic', profile:generic};
+    return {key:'generic', profile: buildGenericProfile(raw)};
   }
   function articleFor(word){ return /^[aeiou]/i.test(word) ? 'an' : 'a'; }
   function weightedDifficulty(rng){
@@ -404,9 +539,18 @@ const Dossier = (() => {
       const capability = profile.capabilities[cIdx];
       const usersShort = titleCase(domain.users.split(' and ')[0]);
 
+      // If the capability name already contains the tech name (as happens
+      // for the generic fallback profile, e.g. "Astro Photography Software
+      // Analytics Tool"), skip title templates that would insert the tech
+      // name a second time.
+      const capabilityHasTech = capability.toLowerCase().includes(profile.display.toLowerCase());
+      const templatePool = capabilityHasTech
+        ? PROJECT_TITLE_TEMPLATES.filter(t => !t.includes('{tech}'))
+        : PROJECT_TITLE_TEMPLATES;
+
       let title, attempt=0;
       do{
-        const tpl = pick(rng, PROJECT_TITLE_TEMPLATES);
+        const tpl = pick(rng, templatePool);
         title = tpl.replace('{capability}',capability).replace('{users}',usersShort).replace('{tech}',profile.display);
         attempt++;
       } while(usedTitles.has(title) && attempt < 4);
@@ -439,7 +583,7 @@ const Dossier = (() => {
      standalone catalog file — it never runs in this page, only in the
      downloaded one. Given a project's title/domain/stack/features/
      deliverables it synthesises a generic ER Diagram, Mindmap, Flow
-     Diagram, and DFD (Levels 0/1/2) entirely client-side, no network. */
+     Diagram, and DFD at Levels 0/1/2 entirely client-side, no network. */
   function ProjectDiagramEngine(PROJECTS){
     function esc(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function wrap(text, maxChars){
