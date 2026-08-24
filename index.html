@@ -40,8 +40,6 @@
   .uni-name .sub{ font-size:12.5px; color:var(--ink-soft); }
 
   .hero{ padding:56px 0 40px; border-bottom:1px solid var(--line); }
-  .file-tag{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--crimson-dark); background:var(--crimson-wash); padding:6px 12px 6px 10px; border-radius:100px; margin-bottom:20px; }
-  .file-tag .dot{width:6px;height:6px;border-radius:50%; background:var(--crimson);}
   .hero h2{ font-family:var(--serif); font-weight:700; font-size:clamp(30px,4.2vw,44px); line-height:1.08; letter-spacing:-.015em; margin:0 0 16px; }
   .hero h2 em{ font-style:italic; font-weight:500; color:var(--crimson); }
   .hero .lede{ font-size:16.5px; color:var(--ink-soft); max-width:62ch; margin:0 0 22px; }
@@ -53,8 +51,6 @@
   .panel-section{ padding:44px 0 60px; }
   .card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-card); overflow:hidden; }
   .card-top{ display:flex; gap:16px; padding:28px 28px 20px; align-items:flex-start; flex-wrap:wrap; }
-  .seal-num{ flex:none; width:48px; height:48px; border-radius:50%; border:1.5px solid var(--crimson); color:var(--crimson-dark); font-family:var(--mono); font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:center; position:relative; }
-  .seal-num::after{ content:""; position:absolute; inset:4px; border:1px dashed var(--crimson); border-radius:50%; opacity:.5; }
   .card-copy{flex:1; min-width:240px;}
   .card-copy .kicker{ font-family:var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint); margin:2px 0 6px; }
   .card-copy h3{ font-family:var(--serif); font-size:22px; font-weight:600; margin:0 0 10px; }
@@ -72,28 +68,6 @@
   .btn svg{width:15px; height:15px; flex:none;}
   .gen-status{ font-family:var(--mono); font-size:12.5px; margin-top:10px; min-height:16px; }
   .gen-status.ok{color:#1C7C3F;} .gen-status.err{color:var(--crimson-dark);} .gen-status.busy{color:var(--brass);}
-
-  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
-  .chip-btn{ font-family:var(--mono); font-size:11.5px; padding:6px 12px; border-radius:100px; border:1px solid var(--line-strong); background:#fff; color:var(--ink-soft); cursor:pointer; }
-  .chip-btn:hover{ border-color:var(--crimson); color:var(--crimson-dark); }
-
-  details.disclosure{margin-top:16px;}
-  details.disclosure > summary{ cursor:pointer; list-style:none; font-size:12.5px; color:var(--ink-faint); display:inline-flex; align-items:center; gap:5px; }
-  details.disclosure > summary::-webkit-details-marker{display:none;}
-  details.disclosure > summary::before{content:"▸"; font-size:10px;}
-  details.disclosure[open] > summary::before{content:"▾";}
-  details.disclosure p{font-size:12.5px; color:var(--ink-soft); margin:8px 0 0; max-width:74ch;}
-
-  .sample-strip{ margin-top:26px; }
-  .sample-strip h4{ font-family:var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 10px; }
-  .sample-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-  @media (max-width:640px){ .sample-grid{grid-template-columns:1fr;} }
-  .sample-item{ border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:var(--paper-raised); }
-  .sample-item .n{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
-  .sample-item .l{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
-
-  footer{padding:36px 0 56px; border-top:1px solid var(--line);}
-  .footer-note{ font-size:12px; color:var(--ink-faint); max-width:80ch; }
 
   .toast-region{position:fixed; bottom:20px; right:20px; z-index:50; display:flex; flex-direction:column; gap:10px;}
   .toast{ background:var(--ink); color:#fff; font-size:13px; padding:12px 16px; border-radius:10px; box-shadow:0 10px 30px -6px rgba(0,0,0,.35); max-width:320px; animation:toastIn .18s ease; }
@@ -125,7 +99,6 @@
 
 <section class="hero">
   <div class="wrap">
-    <span class="file-tag"><span class="dot"></span> Resource 07 · Student Projects</span>
     <h2>Turn one <em>technology</em> into twenty project ideas.</h2>
     <p class="lede">Type a broad technology and get a full, self-contained catalog of 20 fresh, right-sized B.Tech project briefs — each with a problem statement, tech stack, key features, deliverables and a difficulty rating — plus a shared 16-week lab roadmap. Every run reshuffles the combinations, so no two batches of students need to compare identical ideas.</p>
     <div class="prof-card">
@@ -140,13 +113,12 @@
 
 <section class="panel-section">
   <div class="wrap">
-    <div class="card" id="r7">
+    <div class="card" id="generator">
       <div class="card-top">
-        <div class="seal-num">07</div>
         <div class="card-copy">
           <p class="kicker">Student Projects · Draft Assistance</p>
           <h3>Project Idea Generator</h3>
-          <p class="story">Works for Python, Web Development, Machine Learning, Cybersecurity, Mobile Development, Cloud Computing, Blockchain, Computer Vision, NLP, Data Science, Game Development, AR/VR, DBMS, IoT, Robotics, Big Data, DevOps, Computer Networks, Operating Systems, Software Testing, HCI, Distributed Systems, Compiler Design, Quantum Computing, Bioinformatics, Computer Graphics — or type any other technology and it will still generate a full, topic-tailored catalog around it.</p>
+          <p class="story">Type any technology — from the well-known to the obscure — and get a full, topic-tailored 20-project catalog built around it.</p>
         </div>
       </div>
       <div class="gen-panel">
@@ -158,60 +130,10 @@
           </button>
         </div>
         <div class="gen-status" id="project-status" role="status"></div>
-
-        <div class="chip-row" aria-label="Quick-pick technologies">
-          <button class="chip-btn" type="button" data-tech="Python">Python</button>
-          <button class="chip-btn" type="button" data-tech="Web Development">Web Development</button>
-          <button class="chip-btn" type="button" data-tech="Machine Learning">Machine Learning</button>
-          <button class="chip-btn" type="button" data-tech="Cybersecurity">Cybersecurity</button>
-          <button class="chip-btn" type="button" data-tech="Mobile App Development">Mobile Development</button>
-          <button class="chip-btn" type="button" data-tech="Cloud Computing">Cloud Computing</button>
-          <button class="chip-btn" type="button" data-tech="Blockchain">Blockchain</button>
-          <button class="chip-btn" type="button" data-tech="Computer Vision">Computer Vision</button>
-          <button class="chip-btn" type="button" data-tech="Natural Language Processing">NLP</button>
-          <button class="chip-btn" type="button" data-tech="Data Science">Data Science</button>
-          <button class="chip-btn" type="button" data-tech="Game Development">Game Development</button>
-          <button class="chip-btn" type="button" data-tech="AR/VR">AR/VR</button>
-          <button class="chip-btn" type="button" data-tech="DBMS">DBMS</button>
-          <button class="chip-btn" type="button" data-tech="IoT">IoT</button>
-          <button class="chip-btn" type="button" data-tech="Robotics">Robotics</button>
-          <button class="chip-btn" type="button" data-tech="Big Data">Big Data</button>
-          <button class="chip-btn" type="button" data-tech="DevOps">DevOps</button>
-          <button class="chip-btn" type="button" data-tech="Computer Networks">Computer Networks</button>
-          <button class="chip-btn" type="button" data-tech="Operating Systems">Operating Systems</button>
-          <button class="chip-btn" type="button" data-tech="Software Testing">Software Testing</button>
-          <button class="chip-btn" type="button" data-tech="Human-Computer Interaction">HCI</button>
-          <button class="chip-btn" type="button" data-tech="Distributed Systems">Distributed Systems</button>
-          <button class="chip-btn" type="button" data-tech="Compiler Design">Compiler Design</button>
-          <button class="chip-btn" type="button" data-tech="Quantum Computing">Quantum Computing</button>
-          <button class="chip-btn" type="button" data-tech="Bioinformatics">Bioinformatics</button>
-          <button class="chip-btn" type="button" data-tech="Computer Graphics">Computer Graphics</button>
-        </div>
-
-        <details class="disclosure">
-          <summary>How this catalog is built</summary>
-          <p>Built entirely in your browser by combining the chosen technology with a bank of real-world problem domains — no server, nothing uploaded, and no external code is loaded or exposed to produce it. Every one of the 20 briefs is written out in full (problem, stack, features, deliverables) — nothing is left blank. For technologies without a hand-built profile, the generator still tailors the stack, capability names and features to the exact topic you typed, so any CSE elective — not just the fourteen quick-pick chips — gets a genuinely topic-specific catalog rather than a generic placeholder one. In the downloaded catalog, clicking any idea's title (or its ◇ icon) instantly opens its ER Diagram, Mindmap, Flow Diagram, and DFD at Levels 0/1/2 — all synthesised from that idea's own domain, stack and features, no server call involved. Treat each brief and diagram set as a strong starting point for a student team to scope and refine, not a final specification.</p>
-        </details>
-
-        <div class="sample-strip">
-          <h4>What each catalog contains</h4>
-          <div class="sample-grid">
-            <div class="sample-item"><div class="n">20 sheets</div><div class="l">One per project, each with its own anchor and index entry</div></div>
-            <div class="sample-item"><div class="n">Tech stack · features · deliverables</div><div class="l">Sampled per project, no two sheets identical</div></div>
-            <div class="sample-item"><div class="n">16-week roadmap</div><div class="l">Shared phase-by-phase plan for a 4-member team</div></div>
-            <div class="sample-item"><div class="n">Click any idea title</div><div class="l">Instantly auto-generates its ER Diagram, Mindmap, Flow Diagram &amp; DFD (Levels 0–2)</div></div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
-
-<footer>
-  <div class="wrap">
-    <p class="footer-note">This page is a static, self-contained tool — Resource 07 from the Faculty Resource Dossier, split out on its own. It generates files locally in your browser; nothing is uploaded or stored. Maintained for Dr. Abhishek Bhattacherjee, Professor, Department of Computer Science &amp; Engineering, MM(DU), Mullana–Ambala.</p>
-  </div>
-</footer>
 
 <div class="toast-region" id="toast-region" aria-live="polite"></div>
 
@@ -312,7 +234,7 @@ const Dossier = (() => {
       capabilities:["Predictive Model","Recommendation Engine","Classification System","Anomaly Detector","Forecasting Tool","Risk-Scoring Model","Personalisation Engine","Pattern-Recognition System","Decision-Support Tool","Early-Warning System"],
       features:["Data preprocessing & feature-engineering pipeline","Model training with cross-validation","Real-time or batch inference API","Performance dashboard (accuracy / precision / recall)","Comparison across multiple algorithms","Feature-importance / explainability view"],
       deliverables:["Trained & evaluated ML model","Inference API / service","Notebook documenting experiments","Evaluation report with metrics"] },
-    data_science:{ display:"Data Science & Analytics", keywords:["data science","data analytics","analytics","business intelligence"," bi ","data visualization","data visualisation"],
+    data_science:{ display:"Data Science & Analytics", keywords:["data science","data analytics","analytics","business intelligence","bi","data visualization","data visualisation"],
       stack:["Python","Pandas","NumPy","Plotly Dash (or similar BI dashboard)","SQL"],
       capabilities:["Analytics Dashboard","Trend-Forecasting Tool","Insight Explorer","KPI Monitoring Tool","Comparative Analysis Tool","Anomaly-Spotting Dashboard","Segmentation Explorer","What-If Simulator","Reporting Suite"],
       features:["Interactive charts & filters","Automated data-cleaning pipeline","Downloadable reports (PDF/Excel)","Trend & correlation analysis","Drill-down views by category/time","Custom KPI threshold alerts"],
@@ -322,7 +244,7 @@ const Dossier = (() => {
       capabilities:["Text Classifier","Summarisation Tool","Chatbot Assistant","Sentiment Analyzer","Named-Entity Extractor","Question-Answering System","Translation Aid","Plagiarism / Similarity Checker","Auto-Tagging Tool"],
       features:["Text preprocessing & tokenisation pipeline","Pretrained transformer fine-tuning","Confidence / explanation scores","Optional multi-language support","Interactive chat/query interface","Batch document processing"],
       deliverables:["Fine-tuned NLP model","Web/chat interface","Evaluation report (F1 / accuracy)","Sample dataset & annotations"] },
-    cv:{ display:"Computer Vision", keywords:["computer vision"," cv ","image processing","opencv","object detection"],
+    cv:{ display:"Computer Vision", keywords:["computer vision","cv","image processing","opencv","object detection"],
       stack:["Python","OpenCV","TensorFlow / Keras or PyTorch","MediaPipe"],
       capabilities:["Object Detector","Image Classifier","Real-Time Tracker","Gesture Recognizer","Defect / Anomaly Spotter","Scene Analyzer","Counting System","Face / Landmark Analyzer","Video Highlight Extractor"],
       features:["Real-time webcam/video inference","Bounding-box / segmentation visualisation","Model trained on a public dataset","Configurable confidence thresholds","Batch image/video processing","Exportable annotated results"],
@@ -332,7 +254,7 @@ const Dossier = (() => {
       capabilities:["Intrusion Detection System","Vulnerability Scanner","Phishing Detector","Log Anomaly Monitor","Access-Control Auditor","Password Strength / Leak Checker","Network Traffic Analyzer","Encrypted File Vault"],
       features:["Real-time alerting on suspicious activity","Rule-based and/or ML-based detection","Dashboard of flagged events","Exportable audit/compliance reports","Configurable detection thresholds","Simulated-attack test suite"],
       deliverables:["Working detection/scanning tool","Threat-model document","Test results against simulated attacks","Security report with recommendations"] },
-    cloud:{ display:"Cloud Computing", keywords:["cloud","aws","azure","gcp","devops"],
+    cloud:{ display:"Cloud Computing", keywords:["cloud","aws","azure","gcp"],
       stack:["AWS / Azure / GCP free tier","Docker","Kubernetes (basic)","Terraform (basic IaC)","GitHub Actions (CI/CD)"],
       capabilities:["Auto-Scaling Deployment Pipeline","Serverless Task Processor","Multi-Service Cost Dashboard","Backup & Disaster-Recovery Tool","Container Orchestration Demo","Resource-Usage Monitor","CI/CD Pipeline Template","Log Aggregation Dashboard"],
       features:["Infrastructure-as-code setup","Auto-scaling based on load","Cost tracking & budget alerts","CI/CD pipeline with automated tests","Centralised logging & monitoring","Role-based cloud access control"],
@@ -382,12 +304,12 @@ const Dossier = (() => {
       capabilities:["Network-Traffic Analyzer","Custom Routing-Protocol Simulator","Bandwidth-Monitoring Tool","Network-Topology Visualizer","Congestion-Control Simulator","Secure-File-Transfer Utility","Network-Intrusion Simulator","QoS Management Tool"],
       features:["Packet capture & protocol-level analysis","Simulated multi-node network topology","Real-time traffic/bandwidth visualisation","Custom protocol logic implementation","Fault/failure simulation & recovery","Performance metrics (latency/throughput)"],
       deliverables:["Working network simulation/tool","Topology & protocol design documentation","Captured-traffic analysis samples","Performance evaluation report"] },
-    os:{ display:"Operating Systems", keywords:["operating system","kernel","process scheduling"],
+    os:{ display:"Operating Systems", keywords:["operating system","os","kernel","process scheduling"],
       stack:["C","xv6 / Linux kernel modules (simulated)","QEMU / Bochs emulator","Python (for scheduling simulators)"],
       capabilities:["CPU-Scheduling Simulator","Memory-Management Simulator","Deadlock-Detection Tool","File-System Simulator","Process-Synchronization Demo","Virtual-Memory Paging Simulator","Disk-Scheduling Simulator","Mini Shell / Command Interpreter"],
       features:["Configurable scheduling/allocation algorithms","Visual simulation of system state over time","Comparative performance across algorithms","Deadlock/resource-conflict detection","Step-by-step execution trace/logging","Editable workload/input configuration"],
       deliverables:["Working OS-concept simulator","Algorithm comparison report","Source code with inline documentation","Sample test-case results"] },
-    software_testing:{ display:"Software Testing & QA", keywords:["software testing","quality assurance"," qa ","test automation"],
+    software_testing:{ display:"Software Testing & QA", keywords:["software testing","quality assurance","qa","test automation"],
       stack:["Selenium","PyTest / JUnit","GitHub Actions (CI)","Postman / REST Assured (API testing)"],
       capabilities:["Automated Test-Suite Runner","Bug-Tracking & Reporting Tool","API-Testing Framework","Regression-Testing Pipeline","Test-Coverage Analyzer","Load/Performance-Testing Tool","Cross-Browser Testing Suite","Test-Case Management System"],
       features:["Automated test-script execution","Detailed pass/fail reporting & dashboards","Integration with a CI pipeline","Reusable, data-driven test cases","Bug logging with severity/priority tagging","Coverage and performance metrics"],
@@ -501,9 +423,16 @@ const Dossier = (() => {
   /* Matches a keyword only when it starts at a word boundary in the typed
      topic (so "blockchain" still matches inside "blockchaining", but short
      keywords like "ai"/"ar"/"ml"/"os" no longer false-match mid-word, e.g.
-     "ai" inside "chain" or "ar" inside "software"). */
+     "ai" inside "chain" or "ar" inside "software"). Short keywords (<=3
+     chars, e.g. "ar","vr","ai","ml","os","cv","bi","qa") additionally
+     require a trailing word boundary too, so "ar" won't match inside
+     "Architecture" and "os" won't match inside "Cost" — only a standalone
+     token like "AR" or a compound like "AR Chatbot"/"AR/VR" counts. */
   function keywordMatches(text, kw){
-    return new RegExp('\\b' + escapeRegex(kw)).test(text);
+    const trimmed = kw.trim();
+    const esc = escapeRegex(trimmed);
+    const pattern = trimmed.length <= 3 ? ('\\b' + esc + '\\b') : ('\\b' + esc);
+    return new RegExp(pattern).test(text);
   }
   function resolveTechProfile(raw){
     const text = raw.trim().toLowerCase();
@@ -989,7 +918,7 @@ const Dossier = (() => {
 <div class="hero">
   <div class="eyebrow">Project Lab Catalog · ${escHtml(techDisplay)}</div>
   <h1>${escHtml(meta.title)}</h1>
-  <div class="meta-line">${escHtml(meta.sem)} Semester &middot; ${projects.length} Sheets &middot; Software-Only &middot; ${escHtml(meta.duration)} (${escHtml(meta.weeks)}) &middot; Team of ${escHtml(meta.teamSize)}</div>
+  <div class="meta-line">${projects.length} Sheets &middot; Software-Only &middot; ${escHtml(meta.duration)} (${escHtml(meta.weeks)}) &middot; Team of ${escHtml(meta.teamSize)}</div>
   <p class="meta-note">Generated for the <strong>${escHtml(techDisplay)}</strong> track &middot; all ${projects.length} projects are software-only, buildable with free/open-source tools, and scoped for a ${escHtml(meta.teamSize)}-member team within a ${escHtml(meta.duration)} (${escHtml(meta.weeks)}) lab cycle. Generated ${generatedOn} for Dr. Abhishek Bhattacherjee, Dept. of CSE, MM(DU) Mullana–Ambala.</p>
 </div>
 <main>
@@ -1018,7 +947,7 @@ const Dossier = (() => {
         const rng = mulberry32(hashSeed(raw+'_projects_'+Date.now()));
         const { profile } = resolveTechProfile(raw);
         const projects = buildProjectList(rng, profile, PROJECT_DOMAINS, 20);
-        const meta = { title:`B.Tech CSE 7th Sem — ${profile.display} Project Lab`, sem:'7th', teamSize:'4', duration:'3-Month', weeks:'16 Weeks' };
+        const meta = { title:`B.Tech CSE — ${profile.display} Project Lab`, teamSize:'4', duration:'3-Month', weeks:'16 Weeks' };
         const htmlOut = buildProjectCatalogHtml(profile.display, projects, meta);
         const blob = new Blob([htmlOut], {type:'text/html;charset=utf-8'});
         downloadBlob(blob, `${safeFilename(profile.display)}_Project_Catalog.html`);
@@ -1038,13 +967,6 @@ const Dossier = (() => {
 })();
 
 document.getElementById('project-topic').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); Dossier.generateProjects(); } });
-
-document.querySelectorAll('.chip-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.getElementById('project-topic').value = btn.getAttribute('data-tech');
-    document.getElementById('project-topic').focus();
-  });
-});
 </script>
 
 </body>
